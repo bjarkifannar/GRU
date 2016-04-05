@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,MAAO,CACN,gBAAgB,CAAE,OAAO,CACzB,KAAK,CAAE,IAAI,CCFZ,MAAO,CACN,gBAAgB,CAAE,OAAO,CACzB,KAAK,CAAE,IAAI",
+"mappings": "AAAA,MAAO,CACN,gBAAgB,CAAE,OAAO,CACzB,KAAK,CAAE,IAAI,CAEX,QAAE,CACD,KAAK,CAAE,KAAK,CCLd,MAAO,CACN,gBAAgB,CAAE,OAAO,CACzB,KAAK,CAAE,KAAK,CACZ,KAAK,CAAE,IAAI",
 "sources": ["../scss/_header.scss","../scss/_footer.scss"],
 "names": [],
 "file": "style.css"
