@@ -6,7 +6,7 @@
 	$pageName = "Home";
 
 	/* Prepare to fetch the forums */
-	$forumQuery = "SELECT id, forum_name FROM forums";
+	$forumQuery = "SELECT id, forum_name FROM forums ORDER BY forum_name ASC";
 	$forumRes = $db->prepare($forumQuery);
 	$forumRes->execute();
 ?>
@@ -38,7 +38,7 @@
 				?>
 				<tr>
 					<td>
-						<h3><?php echo $row['forum_name']; ?></h3>
+						<h3><a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3>
 					</td>
 				</tr>
 				<?php
