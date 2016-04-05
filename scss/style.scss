@@ -1,6 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
 @import 'header';
 @import 'footer';
-@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
+@import 'forum';
 
 * {
 	box-sizing: border-box;
@@ -22,4 +23,8 @@ html, body {
 
 .content-wrap, header, footer {
 	display: table-row;
+}
+
+table {
+	border-collapse: collapse;
 }
