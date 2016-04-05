@@ -1,4 +1,4 @@
-.forum-list-table {
+.forum-list-table, .forum-category-table {
 	width: 90%;
 	margin: 0 auto;
 	padding: 0;
@@ -6,14 +6,14 @@
 
 /* Medium screens */
 @media screen and (min-width: 48em) {
-	.forum-list-table {
+	.forum-list-table, .forum-category-table {
 		width: 75%;
 	}
 }
 
 /* Big screens */
 @media screen and (min-width: 60em) {
-	.forum-list-table {
+	.forum-list-table, .forum-category-table {
 		width: 50%;
 	}
 }

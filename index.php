@@ -1,8 +1,11 @@
 <?php
+	/* Get a database connection */
 	require_once 'core/db_connect.php';
 	
+	/* Set the page name for the title */
 	$pageName = "Home";
 
+	/* Prepare to fetch the forums */
 	$forumQuery = "SELECT id, forum_name FROM forums";
 	$forumRes = $db->prepare($forumQuery);
 	$forumRes->execute();
@@ -10,10 +13,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<?php require_once 'inc/head.php'; ?>
+		<?php
+			/* Require the head */
+			require_once 'inc/head.php';
+		?>
 	</head>
 	<body>
-		<?php require_once 'inc/header.php'; ?>
+		<?php
+			/* Require the header */
+			require_once 'inc/header.php';
+		?>
 		<table class="forum-list-table">
 			<thead>
 				<tr>
@@ -24,6 +33,7 @@
 			</thead>
 			<tbody>
 				<?php
+					/* Fetch the forums and show them */
 					while ($row = $forumRes->fetch(PDO::FETCH_ASSOC)) {
 				?>
 				<tr>
@@ -34,10 +44,14 @@
 				<?php
 					}
 
+					/* Set the forum result variable to null to free memory */
 					$forumRes = null;
 				?>
 			</tbody>
 		</table>
-		<?php require_once 'inc/footer.php'; ?>
+		<?php
+			/* Require the footer */
+			require_once 'inc/footer.php';
+		?>
 	</body>
 </html>
