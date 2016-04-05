@@ -1,3 +1,4 @@
+</div> <!-- .content-wrap -->
 <footer>
 	<div>
 		<p></p>
