@@ -1,8 +1,8 @@
 <header>
 	<nav>
-		<ul>
+		<ul class="nav">
 			<li>
-				<a href="index.php">Hone</a>
+				<a href="index.php">Home</a>
 			</li>
 			<li>
 				<a href="#">Login</a>
