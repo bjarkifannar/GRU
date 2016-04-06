@@ -18,16 +18,48 @@ header {
 	.nav {
 		margin: 0;
 		padding: 0;
-		display: block;
 		list-style: none;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: space-between;
 
 		li {
-			margin: 0 1em 0 0;
+			margin: 0;
 			display: inline-block;
 		}
 	}
 
+	.nav-flex-left, .nav-flex-right {
+		width: 50%;
+	}
+
+	.nav-flex-left {
+		justify-content: flex-start;
+	}
+
+	.nav-flex-right {
+		justify-content: flex-end;
+	}
+
+	.nav-left, .nav-right {
+		width: auto;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+
+		li {
+			width: auto;
+		}
+	}
+
 	.nav-right {
-  		justify-content: flex-end;
+		justify-content: flex-end;
+	}
+	.nav-left {
+		justify-content: flex-start;
 	}
 }

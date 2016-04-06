@@ -1,14 +1,14 @@
 <header>
 	<nav>
 		<ul class="nav">
-			<li>
+			<li class="nav-flex-left">
 				<ul class="nav-left">
 					<li>
-						<a href="index.php">Home</a>
+						<a href="index.php">Gnome</a>
 					</li>
 				</ul>
 			</li>
-			<li>
+			<li class="nav-flex-right">
 				<ul class="nav-right">
 					<?php
 						if ($logged == "in") {
