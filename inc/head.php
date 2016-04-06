@@ -1,3 +1,10 @@
+<?php
+	/* Require the functions file */
+	require_once 'core/functions.php';
+
+	/* Start a secure session */
+	sec_session_start();
+?>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php echo $pageName; ?></title>
