@@ -19,6 +19,9 @@
 					<li>
 						<a href="profile.php">Profile</a>
 					</li>
+					<li>
+						<p>Welcome <?php echo $_SESSION['username']; ?>!</p>
+					</li>
 					<?php
 						} else {
 					?>
