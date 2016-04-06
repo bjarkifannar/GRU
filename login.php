@@ -55,6 +55,11 @@
 							<input type="button" value="Login" onclick="formhash(this.form, this.form.password);">
 						</td>
 					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<a href="register.php">If you don't have an account you can register here.</a>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</form>
