@@ -25,7 +25,7 @@
 			}
 		?>
 		<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" accept-charset="UTF-8">
-			<table class="register-table">
+			<table class="register-table" align="center">
 				<thead>
 					<tr>
 						<th colspan="2">

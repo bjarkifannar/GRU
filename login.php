@@ -25,7 +25,7 @@
 			} else {
 		?>
 		<form action="core/process_login.php" method="POST" accept-charset="UTF-8">
-			<table class="login-table">
+			<table class="login-table" align="center">
 				<thead>
 					<tr>
 						<th colspan="2">
