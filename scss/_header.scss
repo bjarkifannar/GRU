@@ -50,9 +50,12 @@ header {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
+		-webkit-align-items: baseline; /* Safari */
+  		align-items:         baseline;
 
 		li {
 			width: auto;
+
 		}
 	}
 

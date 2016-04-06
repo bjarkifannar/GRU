@@ -14,13 +14,13 @@
 						if ($logged == "in") {
 					?>
 					<li>
+						<p>Welcome <?php echo $_SESSION['username']; ?>!</p>
+					</li>
+					<li>
 						<a href="logout.php">Log out</a>
 					</li>
 					<li>
 						<a href="profile.php">Profile</a>
-					</li>
-					<li>
-						<p>Welcome <?php echo $_SESSION['username']; ?>!</p>
 					</li>
 					<?php
 						} else {
