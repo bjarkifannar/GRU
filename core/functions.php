@@ -29,8 +29,8 @@
 	}
 
 	/* Login function */
-	function login($email, $password) {
-		$loginQuery = "SELECT username, password, salt FROM users WHERE email=:email LIMIT 1";
+	function login($email, $password, $db) {
+		$loginQuery = "SELECT id, username, password, salt FROM users WHERE email=:email LIMIT 1";
 		$loginRes = $db->prepare($loginQuery);
 		$loginRes->bindParam(':email', $email);
 		$loginRes->execute();
@@ -38,6 +38,7 @@
 		/* Fetch the user information */
 		while ($row = $loginRes->fetch(PDO::FETCH_ASSOC)) {
 			/* Get the password */
+			$salt = $row['salt'];
 			$password = hash('sha512', $password.$salt);
 
 			/* If the password matches */
