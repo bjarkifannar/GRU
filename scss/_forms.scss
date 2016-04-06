@@ -1,8 +1,24 @@
-.regsiter-table {
+.register-table {
+	width: 90%;
 	margin: 0 auto;
 	padding: 0;
 }
 .login-table {
+	width: 90%;
 	margin: 0 auto;
 	padding: 0;
+}
+
+/* Medium screens */
+@media screen and (min-width: 48em) {
+	.login-table, .register-table {
+		width: 75%;
+	}
+}
+
+/* Big screens */
+@media screen and (min-width: 60em) {
+	.login-table, .register-table {
+		width: 50%;
+	}
 }
