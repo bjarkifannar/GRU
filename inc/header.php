@@ -11,10 +11,10 @@
 			<li>
 				<ul class="nav-right">
 					<li>
-						<a href="#">Login</a>
+						<a href="login.php">Login</a>
 					</li>
 					<li>
-						<a href="#">Register</a>
+						<a href="register.php">Register</a>
 					</li>
 				</ul>
 			</li>
