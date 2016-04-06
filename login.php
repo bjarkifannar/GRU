@@ -4,8 +4,6 @@
 	
 	/* Set the page name for the title */
 	$pageName = "Login";
-
-	$logged = "out";
 ?>
 <!DOCTYPE html>
 <html>

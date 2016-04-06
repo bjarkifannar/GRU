@@ -39,7 +39,7 @@
 							<label for="name">Full name:*</label>
 						</td>
 						<td>
-							<input type="text" name="name">
+							<input type="text" name="name" required>
 						</td>
 					</tr>
 					<tr>
@@ -47,7 +47,7 @@
 							<label for="username">Username:*</label>
 						</td>
 						<td>
-							<input type="text" name="username">
+							<input type="text" name="username" required>
 						</td>
 					</tr>
 					<tr>
@@ -79,7 +79,7 @@
 							<label for="email">Email:*</label>
 						</td>
 						<td>
-							<input type="text" name="email">
+							<input type="text" name="email" required>
 						</td>
 					</tr>
 					<tr>
@@ -87,7 +87,7 @@
 							<label for="password">Password:*</label>
 						</td>
 						<td>
-							<input type="password" name="password">
+							<input type="password" name="password" required>
 						</td>
 					</tr>
 					<tr>
@@ -95,7 +95,7 @@
 							<label for="confirmpwd">Confirm password:*</label>
 						</td>
 						<td>
-							<input type="password" name="confirmpwd">
+							<input type="password" name="confirmpwd" required>
 						</td>
 					</tr>
 					<tr>
