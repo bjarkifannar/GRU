@@ -18,6 +18,7 @@
 			/* Require the header */
 			require_once 'inc/header.php';
 		?>
+		<!-- Content goes here -->
 		<?php
 			/* Require the footer */
 			require_once 'inc/footer.php';
