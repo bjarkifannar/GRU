@@ -36,7 +36,6 @@
 										posts.created AS created,
 										posts.revised AS revised,
 										posts.post_content AS post_content,
-										posts.solved AS solved,
 										posts.posted_by AS posted_by_id,
 										users.username AS posted_by
 											FROM posts
@@ -74,8 +73,90 @@
 			</tbody>
 		</table>
 		<?php
+			/* Users can reply if they are logged in */
+			if ($logged == "in") {
+				if (isset($_POST['submit_reply'])) {
+					/* Get the title, the content and the user's ID */
+					$replyTitle = $_POST['reply_title'];
+					$replyContent = $_POST['reply_content'];
+					$userID = $_SESSION['user_id'];
+
+					/* Create a DOMDocument item */
+					$dom = new DOMDocument();
+
+					/* Load the HTML and get all the script tags */
+					$dom->loadHTML($replyContent);
+					$scriptTags = $dom->getElementsByTagName('script');
+					$length = $scriptTags->length;
+
+					/* Remove each tag from the DOM */
+					for ($i = 0; $i < $length; $i++) {
+						$scriptTags->item($i)->parentNode->removeChild($scriptTags->item($i));
+					}
+
+					/* Get the new html */
+					$newContent = $dom->saveHTML();
+
+					/* Remove all tags from the title */
+					$newTitle = strip_tags($replyTitle);
+
+					/* Insert the reply */
+					$insertReplyQuery = "INSERT INTO posts (post_name, thread_id, posted_by, post_content)
+													VALUES (:post_name, :thread_id, :posted_by, :post_content)";
+					$insertReplyRes = $db->prepare($insertReplyQuery);
+					$insertReplyRes->bindParam(':post_name', $newTitle);
+					$insertReplyRes->bindParam(':thread_id', $threadID);
+					$insertReplyRes->bindParam(':posted_by', $userID);
+					$insertReplyRes->bindParam(':post_content', $newContent);
+					$insertReplyRes->execute();
+					$insertReplyRes = null;
+
+					/* Refresh the page */
+					echo "<meta http-equiv='refresh' content='0'>";
+				}
+		?>
+		<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+			<table class="reply-table" style="width: 50%; margin: 0 auto;">
+				<thead>
+					<tr>
+						<th>
+							<h3>Reply:</h3>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<input type="text" name="reply_title" placeholder="Title" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea name="reply_content" id="content_editor" required></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="submit" name="submit_reply" value="Submit">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		<?php
+			}
+		?>
+		<?php
 			/* Require the footer */
 			require_once 'inc/footer.php';
 		?>
+		<script src="http://cdn.ckeditor.com/4.5.8/standard/ckeditor.js"></script>
+		<script type="text/javascript">
+			/* Replace the textarea with the CKEditor */
+			CKEDITOR.replace('content_editor', {
+				/* Remove the source button */
+				removeButtons: 'Source',
+			});
+		</script>
 	</body>
 </html>
