@@ -107,10 +107,8 @@
 				$insertPostRes->execute();
 				$insertPostRes = null;
 
-				/* TODO: Redirect to the post */
-
-				/* Temporary */
-				echo '<h2 align="center">Thread created successfully!</h2>';
+				/* Redirect to the post */
+				header('Location: thread.php?tid='.$threadID);
 			}
 		?>
 		<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" style="width: 50%; margin: 0 auto;">
