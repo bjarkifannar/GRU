@@ -46,7 +46,7 @@
 				?>
 				<tr>
 					<td>
-						<h3><?php echo $row['category_name']; ?></h3>
+						<a href="category.php?cid=<?php echo $row['id']; ?>"><h3><?php echo $row['category_name']; ?></h3></a>
 						<p><?php echo $row['category_desc']; ?></p>
 					</td>
 				</tr>
