@@ -69,6 +69,11 @@
 				<td>
 					<a href="thread.php?tid=<?php echo $row['thread_id']; ?>"><h3><?php echo $row['thread_name']; ?></h3></a>
 					<a href="user.php?uid=<?php echo $row['starter_id']; ?>"><p><b><?php echo $row['starter_name']; ?></b></p></a>
+					<?php
+						if ($logged == "in" && $row['starter_id'] == $_SESSION['user_id']) {
+							echo '<a href="remove_thread.php?tid='.$row['thread_id'].'">Remove</a>';
+						}
+					?>
 				</td>
 			</tr>
 		<?php
