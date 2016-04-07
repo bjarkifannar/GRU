@@ -80,6 +80,17 @@
 			}
 
 			$threadRes = null;
+
+			/* If the user is logged in he/she can post a new thread */
+			if ($logged == "in") {
+		?>
+			<tr>
+				<td>
+					<a href="add_thread.php?cid=<?php echo $categoryID; ?>">Add thread</a>
+				</td>
+			</tr>
+		<?php
+			}
 		?>
 		</table>
 		<?php
