@@ -95,18 +95,23 @@
 							<label for="confirmpwd">Confirm password:*</label>
 						</td>
 						<td>
-							<input type="password" name="confirmpwd" required>
+							<input type="password" name="confirmpwd" id="register-password" required>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="button" value="Register" onclick="return regformhash(this.form,
+							<input type="button" value="Register"  id="register-button" onclick="return regformhash(this.form,
 																								this.form.name,
 																								this.form.username,
 																								this.form.gender,
 																								this.form.email,
 																								this.form.password,
 																								this.form.confirmpwd);">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<a href="login.php">Sign in if you already have an account.</a>
 						</td>
 					</tr>
 				</tbody>

@@ -47,12 +47,12 @@
 							<label for="password">Password:*</label>
 						</td>
 						<td>
-							<input type="password" name="password" required>
+							<input type="password" name="password" id="login-password" required>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="button" value="Login" onclick="formhash(this.form, this.form.password);">
+							<input type="button" value="Login" id="login-button" onclick="formhash(this.form, this.form.password);">
 						</td>
 					</tr>
 					<tr>

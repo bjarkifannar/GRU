@@ -69,3 +69,16 @@ function regformhash(form, name, uid, gender, email, password, conf) {
 
 	return true;
 }
+$(function() {
+	$("#login-password").keypress(function(event){
+    	if(event.keyCode == 13){
+        	$("#login-button").click();
+    	}
+	});
+	
+	$("#register-password").keypress(function(event){
+    	if(event.keyCode == 13){
+        	$("#register-button").click();
+    	}
+	});
+});
