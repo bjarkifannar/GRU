@@ -18,41 +18,41 @@
 			/* Require the header */
 			require_once 'inc/header.php';
 		?>
-	<div id="search-bar">
-		<form id="search" method="post" action="index.php">
-				<input type="text" class="search-text" name="q" size="21" placeholder="Search Here" maxlength="120">
-				<input type="submit" value="search" name="search" class="search-button">
-				<div class="search-radio">
-					<input type="radio" name="searched" value="thread">Threads
-  					<input type="radio" name="searched" value="name">Names
-  					<input type="radio" name="searched" value="post">Posts
-				</div>
-		</form>
-		<?PHP
+		<div id="search-bar">
+			<form id="search" method="post" action="search.php">
+					<input type="text" class="search-text" name="q" size="21" placeholder="Search Here" maxlength="120">
+					<input type="submit" value="search" name="search" class="search-button">
+					<div class="search-radio">
+						<input type="radio" name="searched" value="thread">Threads
+	  					<input type="radio" name="searched" value="name">Names
+	  					<input type="radio" name="searched" value="post">Posts
+					</div>
+			</form>
+			<div class="search-clear"></div>
+			<?PHP
 
-			$thread_status = 'unchecked';
-			$name_status = 'unchecked';
-			$post_status = 'unchecked';
+				$thread_status = 'unchecked';
+				$name_status = 'unchecked';
+				$post_status = 'unchecked';
 
-			if (isset($_POST['search'])) {
-				$selected_radio = $_POST['searched'];
+				if (isset($_POST['search'])) {
+					$selected_radio = $_POST['searched'];
 
-				if ($selected_radio == 'thread') {
-					$thread_status = 'checked';
-					echo "1";
+					if ($selected_radio == 'thread') {
+						$thread_status = 'checked';
+						echo "1";
+					}
+					else if ($selected_radio == 'name') {
+						$name_status = 'checked';
+						echo "2";
+					}
+					else if ($selected_radio == 'post'){
+						$post_status = 'checked';
+						echo "3";
+					}
 				}
-				else if ($selected_radio == 'name') {
-					$name_status = 'checked';
-					echo "2";
-				}
-				else if ($selected_radio == 'post'){
-					$post_status = 'checked';
-					echo "3";
-				}
-			}
-		?>
-		<div class="search-clear"></div>
-	</div>
+			?>
+		</div>
 		<?php
 			/* Require the footer */
 			require_once 'inc/footer.php';

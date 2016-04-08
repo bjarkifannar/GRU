@@ -6,6 +6,9 @@
 					<li>
 						<a href="index.php">Gnome</a>
 					</li>
+					<li>
+						<a href="search.php">Search</a>
+					</li>
 				</ul>
 			</li>
 			<li class="nav-flex-right">

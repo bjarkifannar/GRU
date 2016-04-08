@@ -1,11 +1,11 @@
 </div> <!-- .content-wrap -->
 <footer>
 	<div class="top">
-		<div class="top-right">
+		<div class="top-left">
 			<h2>Content</h2>
 			<p>Wow great stuff!</p>
 		</div>
-		<div class="top-left">
+		<div class="top-right">
 			<h2>More content</h2>
 			<ul>
 				<li>wow</li>

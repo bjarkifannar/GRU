@@ -8,10 +8,10 @@ footer {
 		background-color: $basecolor * 1.2;
 		display: flex;
 		justify-content: space-around;
-		
+
 		p, h2{
 			margin: 0;
-			padding: 1em;
+			padding-top: 0.5em;
 		}
 
 		.top-right, .top-left {
