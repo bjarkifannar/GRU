@@ -40,7 +40,7 @@
 			/* Fetch the user information */
 			while ($row = $userRes->fetch(PDO::FETCH_ASSOC)) {
 		?>
-		<table class="profile-table">
+		<table class="profile-table" align="center">
 			<thead>
 				<tr>
 					<th colspan="2">
