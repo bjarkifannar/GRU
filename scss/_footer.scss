@@ -6,10 +6,16 @@ footer {
 	height: 0;
 	.top {
 		background-color: $basecolor * 1.2;
-		display: block;
-		p {
+		display: flex;
+		justify-content: space-around;
+		
+		p, h2{
 			margin: 0;
 			padding: 1em;
+		}
+
+		.top-right, .top-left {
+			
 		}
 	}
 	.bottom {
