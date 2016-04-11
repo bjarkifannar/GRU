@@ -70,8 +70,13 @@
 					<a href="thread.php?tid=<?php echo $row['thread_id']; ?>"><h3><?php echo $row['thread_name']; ?></h3></a>
 					<a href="user.php?uid=<?php echo $row['starter_id']; ?>"><p><b><?php echo $row['starter_name']; ?></b></p></a>
 					<?php
-						if ($logged == "in" && $row['starter_id'] == $_SESSION['user_id']) {
-							echo '<a href="remove_thread.php?tid='.$row['thread_id'].'">Remove</a>';
+						/* If the user is logged in */
+						if ($logged == "in") {
+							/* If this is the user that posted this thread, or the user is an admin or a moderator */
+							if ($row['starter_id'] == $_SESSION['user_id'] || $_SESSION['role'] == "Admin" || $_SESSION['role'] == "Moderator") {
+								/* This user can remove the thread */
+								echo '<a href="remove_thread.php?tid='.$row['thread_id'].'">Remove</a>';
+							}
 						}
 					?>
 				</td>
