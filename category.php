@@ -73,7 +73,7 @@
 						/* If the user is logged in */
 						if ($logged == "in") {
 							/* If this is the user that posted this thread, or the user is an admin or a moderator */
-							if ($row['starter_id'] == $_SESSION['user_id'] || $_SESSION['role'] == "Admin" || $_SESSION['role'] == "Moderator") {
+							if ($row['starter_id'] == $_SESSION['user_id'] || $_SESSION['role_id'] == 2 || $_SESSION['role_id'] == 3) {
 								/* This user can remove the thread */
 								echo '<a href="remove_thread.php?tid='.$row['thread_id'].'">Remove</a>';
 							}

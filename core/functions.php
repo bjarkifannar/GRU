@@ -30,7 +30,7 @@
 
 	/* Login function */
 	function login($email, $password, $db) {
-		$loginQuery = "SELECT id, username, password, salt FROM users WHERE email=:email LIMIT 1";
+		$loginQuery = "SELECT id, username, password, salt, role_id FROM users WHERE email=:email LIMIT 1";
 		$loginRes = $db->prepare($loginQuery);
 		$loginRes->bindParam(':email', $email);
 		$loginRes->execute();
@@ -49,6 +49,7 @@
 				$_SESSION['user_id'] = $row['id'];
 				$_SESSION['username'] = $row['username'];
 				$_SESSION['login_string'] = hash('sha512', $password.$userBrowser);
+				$_SESSION['role_id'] = $row['role_id'];
 
 				/* Login successful */
 				return true;
