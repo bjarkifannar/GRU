@@ -49,13 +49,17 @@
 		?>
 		<h2 align="center">Ban <?php echo $row['username']; ?></h2>
 		<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
-			<input type="date" name="ban_until" required><br>
+			<p>Ban until: *</p>
+			<input type="date" name="ban_until" required><br><br>
+			<input type="text" name="ban_reason" placeholder="Reason for ban"><br><br>
 			<input type="submit" name="save" value="Ban user">
+			<p>* Required field.</p>
 		</form>
 		<?php
 				} else {
 		?>
 		<h2 align="center">You have banned <?php echo $row['username']; ?> until <?php echo $_POST['ban_until']; ?></h2>
+		<p align="center">Reason for ban: <?php echo $_POST['ban_reason']; ?></p>
 		<?php
 				}
 			}
@@ -64,11 +68,18 @@
 
 			/* If the form has been posted */
 			if (isset($_POST['save'])) {
-				/* Update the database */
+				/* Get the values */
 				$banUntil = $_POST['ban_until'];
-				$updateBanQuery = "UPDATE users SET banned_until=:ban_until WHERE id=:user_id";
+				$banReason = $_POST['ban_reason'];
+
+				/* Sanitize the reason */
+				$banReason = filter_var($banReason, FILTER_SANITIZE_STRING);
+
+				/* Update the database */
+				$updateBanQuery = "UPDATE users SET banned_until=:ban_until, ban_reason=:ban_reason WHERE id=:user_id";
 				$updateBanRes = $db->prepare($updateBanQuery);
 				$updateBanRes->bindParam(':ban_until', $banUntil);
+				$updateBanRes->bindParam(':ban_reason', $banReason);
 				$updateBanRes->bindParam(':user_id', $banUserID);
 				$updateBanRes->execute();
 				$updateBanRes = null;

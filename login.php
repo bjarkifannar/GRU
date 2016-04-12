@@ -46,7 +46,7 @@
 						echo '<h2 align="center">The password you entered does not match our records.</h2>';
 					} else if ($loginMessage == "Banned") {
 						/* Get the date that the ban expires */
-						$selectUserBanQuery = "SELECT banned_until FROM users WHERE email=:email LIMIT 1";
+						$selectUserBanQuery = "SELECT banned_until, ban_reason FROM users WHERE email=:email LIMIT 1";
 						$selectUserBanRes = $db->prepare($selectUserBanQuery);
 						$selectUserBanRes->bindParam(':email', $_POST['email']);
 						$selectUserBanRes->execute();
@@ -54,7 +54,8 @@
 						while ($row = $selectUserBanRes->fetch(PDO::FETCH_ASSOC)) {
 							/* Let the user know they have been banned */
 							echo '<h2 align="center">You have been banned until '.$row['banned_until'].'</h2>';
-							echo '<img src="img/banned.gif" alt="You have been BANNED! HAHA!" align="center">';
+							echo '<p align="center">Reason for ban: '.$row['ban_reason'].'</p>';
+							echo '<img src="img/banned.gif" alt="You have been BANNED! HAHA!">';
 						}
 
 						$selectUserBanRes = null;
