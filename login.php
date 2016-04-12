@@ -1,6 +1,7 @@
 <?php
 	/* Get a database connection */
 	require_once 'core/db_connect.php';
+	require_once 'core/functions.php';
 	
 	/* Set the page name for the title */
 	$pageName = "Login";
@@ -23,8 +24,44 @@
 				/* Go back to the index */
 				header('Location: index.php');
 			} else {
+				/* If all the required fields are filled in */
+				if (isset($_POST['email'], $_POST['p'])) {
+					/* Filter and sanitize the input */
+					$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+					$email = filter_var($email, FILTER_VALIDATE_EMAIL);
+					$password = filter_input(INPUT_POST, 'p', FILTER_SANITIZE_STRING);
+
+					/* Get the login message */
+					$loginMessage = login($email, $password, $db);
+
+					/* If the login was successful */
+					if ($loginMessage == "Success") {
+						/* Redirect the user to the index */
+						header('Location: index.php');
+					} else if ($loginMessage == "Fail") {
+						/* Let the user know that there was an error */
+						echo '<h2 align="center">An unknown error occurred.</h2>';
+					} else if ($loginMessage == "Invalid Password") {
+						/* Let the user know the password is invalid */
+						echo '<h2 align="center">The password you entered does not match our records.</h2>';
+					} else if ($loginMessage == "Banned") {
+						/* Get the date that the ban expires */
+						$selectUserBanQuery = "SELECT banned_until FROM users WHERE email=:email LIMIT 1";
+						$selectUserBanRes = $db->prepare($selectUserBanQuery);
+						$selectUserBanRes->bindParam(':email', $_POST['email']);
+						$selectUserBanRes->execute();
+
+						while ($row = $selectUserBanRes->fetch(PDO::FETCH_ASSOC)) {
+							/* Let the user know they have been banned */
+							echo '<h2 align="center">You have been banned until '.$row['banned_until'].'</h2>';
+							echo '<img src="img/banned.gif" alt="You have been BANNED! HAHA!" align="center">';
+						}
+
+						$selectUserBanRes = null;
+					}
+				}
 		?>
-		<form action="core/process_login.php" method="POST" accept-charset="UTF-8">
+		<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" accept-charset="UTF-8">
 			<table class="login-table" align="center">
 				<thead>
 					<tr>

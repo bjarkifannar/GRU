@@ -30,13 +30,18 @@
 
 	/* Login function */
 	function login($email, $password, $db) {
-		$loginQuery = "SELECT id, username, password, salt, role_id FROM users WHERE email=:email LIMIT 1";
+		$loginQuery = "SELECT id, username, password, salt, role_id, banned_until FROM users WHERE email=:email LIMIT 1";
 		$loginRes = $db->prepare($loginQuery);
 		$loginRes->bindParam(':email', $email);
 		$loginRes->execute();
 
 		/* Fetch the user information */
 		while ($row = $loginRes->fetch(PDO::FETCH_ASSOC)) {
+			/* If the user is banned */
+			if ($row['banned_until'] > date("Y-m-d")) {
+				return "Banned";
+			}
+
 			/* Get the password */
 			$salt = $row['salt'];
 			$password = hash('sha512', $password.$salt);
@@ -52,15 +57,15 @@
 				$_SESSION['role_id'] = $row['role_id'];
 
 				/* Login successful */
-				return true;
+				return "Success";
 			} else {
 				/* Login failed */
-				return false;
+				return "Invalid Password";
 			}
 		}
 
 		/* Login failed */
-		return false;
+		return "Fail";
 	}
 
 	/* Checks if the user is logged in */
