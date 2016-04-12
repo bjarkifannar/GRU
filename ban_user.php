@@ -62,14 +62,17 @@
 
 			$selectUserRes = null;
 
-			/* Update the database */
-			$banUntil = $_POST['ban_until'];
-			$updateBanQuery = "UPDATE users SET banned_until=:ban_until WHERE id=:user_id";
-			$updateBanRes = $db->prepare($updateBanQuery);
-			$updateBanRes->bindParam(':ban_until', $banUntil);
-			$updateBanRes->bindParam(':user_id', $banUserID);
-			$updateBanRes->execute();
-			$updateBanRes = null;
+			/* If the form has been posted */
+			if (isset($_POST['save'])) {
+				/* Update the database */
+				$banUntil = $_POST['ban_until'];
+				$updateBanQuery = "UPDATE users SET banned_until=:ban_until WHERE id=:user_id";
+				$updateBanRes = $db->prepare($updateBanQuery);
+				$updateBanRes->bindParam(':ban_until', $banUntil);
+				$updateBanRes->bindParam(':user_id', $banUserID);
+				$updateBanRes->execute();
+				$updateBanRes = null;
+			}
 
 			/* Require the footer */
 			require_once 'inc/footer.php';
