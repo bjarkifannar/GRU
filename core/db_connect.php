@@ -2,7 +2,7 @@
 	$servername = "82.148.66.15";
 	$database = "gru_h1_forum";
 	$username = "GRU_H1";
-	$password = "mypassword";
+	$password = "aLvLC4JE84nEReGF";
 
 	try {
 		$db = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
