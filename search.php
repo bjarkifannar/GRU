@@ -64,7 +64,7 @@
 					}
 					else if ($selected_radio == 'post'){
 						$post_status = 'checked';
-						$search_query = "SELECT post_name FROM users WHERE post_name LIKE :q ORDER BY post_name ASC";
+						$search_query = "SELECT post_name FROM posts WHERE post_name LIKE :q ORDER BY post_name ASC";
 						$queryRes = $db->prepare($search_query);
 						$queryRes->execute(['q' => "%{$q}%"]);
 
