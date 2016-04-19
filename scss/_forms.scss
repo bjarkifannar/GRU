@@ -1,4 +1,4 @@
-.register-table, .login-table, .profile-table, .thread-list-tabl{
+.register-table, .login-table, .profile-table {
 	width: 90%;
 	max-width: 30em;
 	margin: 0 auto;
@@ -13,6 +13,12 @@
 	}
 
 }
+.thread-list-table {
+	align: center;
+	width: 90%;
+	margin: 0 auto;
+	padding: 0;
+}
 .profile-table:first-child {
 	width: 50%;
 }
@@ -20,12 +26,12 @@ td:first-child {
 	width: 25%;
 }
 @media screen and (min-width: 48em) {
-	.login-table, .register-table, .profile-table {
+	.login-table, .register-table, .profile-table, .thread-list-table{
 		width: 75%;
 	}
 }
 @media screen and (min-width: 60em) {
-	.login-table, .register-table, .profile-table {
+	.login-table, .register-table, .profile-table, .thread-list-table{
 		width: 50%;
 	}
 }
