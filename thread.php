@@ -32,7 +32,8 @@
 			<tbody>
 			<?php
 				/* Get the posts in this thread */
-				$postQuery = "SELECT posts.post_name AS post_name,
+				$postQuery = "SELECT posts.id AS post_id,
+										posts.post_name AS post_name,
 										posts.created AS created,
 										posts.revised AS revised,
 										posts.post_content AS post_content,
@@ -56,6 +57,14 @@
 						<?php
 							if ($row['revised'] != "" && $row['revised'] != NULL) {
 								echo '<p>Revised: '.$row['revised'].'</p>';
+							}
+
+							if ($logged == "in") {
+								if ($row['posted_by_id'] == $_SESSION['user_id']) {
+						?>
+						<a href="remove_post.php?pid=<?php echo $row['post_id']; ?>">Remove</a>
+						<?php
+								}
 							}
 						?>
 						<hr>
