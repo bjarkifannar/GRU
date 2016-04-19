@@ -23,7 +23,7 @@
 					<input type="text" class="search-text" name="q" size="21" placeholder="Search Here" maxlength="120">
 					<input type="submit" value="search" name="search" class="search-button">
 					<div class="search-radio">
-						<input type="radio" name="searched" value="thread">Threads
+						<input type="radio" name="searched" value="thread" checked>Threads
 	  					<input type="radio" name="searched" value="name">Names
 	  					<input type="radio" name="searched" value="post">Posts
 					</div>
@@ -38,17 +38,39 @@
 				if (isset($_POST['search'])) {
 					$selected_radio = $_POST['searched'];
 
+						$q = $_POST['q'];
+
 					if ($selected_radio == 'thread') {
 						$thread_status = 'checked';
-						echo "1";
+						$search_query = "SELECT thread_name FROM threads WHERE thread_name LIKE :q ORDER BY thread_name ASC";
+						$queryRes = $db->prepare($search_query);
+						$queryRes->execute(['q' => "%{$q}%"]);
+
+						while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
+							echo $row['thread_name']. '<br>';
+						}
+
+						$queryRes = null; 
 					}
 					else if ($selected_radio == 'name') {
 						$name_status = 'checked';
-						echo "2";
+						$search_query = "SELECT username FROM users WHERE username LIKE :q ORDER BY username ASC";
+						$queryRes = $db->prepare($search_query);
+						$queryRes->execute(['q' => "%{$q}%"]);
+
+						while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
+							echo $row['username']. '<br>';
+						}
 					}
 					else if ($selected_radio == 'post'){
 						$post_status = 'checked';
-						echo "3";
+						$search_query = "SELECT post_name FROM users WHERE post_name LIKE :q ORDER BY post_name ASC";
+						$queryRes = $db->prepare($search_query);
+						$queryRes->execute(['q' => "%{$q}%"]);
+
+						while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
+							echo $row['post_name']. '<br>';
+						}
 					}
 				}
 			?>
