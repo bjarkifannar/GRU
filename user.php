@@ -174,17 +174,66 @@
 						<a href="ban_user.php?uid=<?php echo $uid; ?>">Ban user</a>
 					</td>
 				</tr>
-				<?php
+			<?php
 						}
 					}
-				?>
+				}
+
+				$userRes = null;
+
+				if ($logged == "in") {
+					/* If this user is an admin, he/she can change the role */
+					if ($_SESSION['role_id'] == 3) {
+						/* If the role is being changed */
+						if (isset($_POST['change_role'])) {
+							/* Get the new role */
+							$newRoleID = $_POST['new_role'];
+
+							/* Update the user's role */
+							$updateRoleQuery = "UPDATE users SET role_id=:role_id WHERE id=:user_id";
+							$updateRoleRes = $db->prepare($updateRoleQuery);
+							$updateRoleRes->bindParam(':role_id', $newRoleID);
+							$updateRoleRes->bindParam(':user_id', $uid);
+							$updateRoleRes->execute();
+							$updateRoleRes = null;
+
+							/* Let the admin know the user's role has been updated */
+			?>
+			<h2 align="center">Role updated successfully!</h2>
+			<?php
+						}
+
+						/* Get the roles */
+						$selectRolesQuery = "SELECT id, role FROM roles";
+						$selectRolesRes = $db->prepare($selectRolesQuery);
+						$selectRolesRes->execute();
+			?>
+				<tr>
+					<td>
+						<p><b>Change role:</b></p>
+					</td>
+					<td>
+						<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+							<select name="new_role">
+							<?php
+								while ($row = $selectRolesRes->fetch(PDO::FETCH_ASSOC)) {
+									echo '<option value="'.$row['id'].'">'.$row['role'].'</option>';
+								}
+
+								$selectRolesRes = null;
+							?>
+							</select>
+							<input type="submit" name="change_role" value="Change">
+						</form>
+					</td>
+				</tr>
+			<?php
+					}
+				}
+			?>
 			</tbody>
 		</table>
 		<?php
-			}
-
-			$userRes = null;
-
 			/* Require the footer */
 			require_once 'inc/footer.php';
 		?>
