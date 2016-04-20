@@ -60,7 +60,7 @@
 							}
 
 							if ($logged == "in") {
-								if ($row['posted_by_id'] == $_SESSION['user_id']) {
+								if ($row['posted_by_id'] == $_SESSION['user_id'] || $_SESSION['role_id'] == 2 || $_SESSION['role_id'] == 3) {
 						?>
 						<a href="remove_post.php?pid=<?php echo $row['post_id']; ?>">Remove</a>
 						<?php
