@@ -29,6 +29,75 @@
 			require_once 'inc/header.php';
 		?>
 		<table class="thread-table" style="width: 50%; margin: 0 auto;">
+			<thead>
+				<tr>
+					<th>
+					<?php
+						/* If this thread has been marked as solved */
+						if (isset($_POST['mark_solved'])) {
+							$solvedStatus = 1;
+
+							$updateQuery = "UPDATE threads SET solved=:solved_status WHERE id=:thread_id LIMIT 1";
+							$updateRes = $db->prepare($updateQuery);
+							$updateRes->bindParam(':solved_status', $solvedStatus);
+							$updateRes->bindParam(':thread_id', $threadID);
+							$updateRes->execute();
+							$updateRes = null;
+						}
+
+						/* If this thread has been marked as unsolved */
+						if (isset($_POST['mark_unsolved'])) {
+							$solvedStatus = 0;
+
+							$updateQuery = "UPDATE threads SET solved=:solved_status WHERE id=:thread_id LIMIT 1";
+							$updateRes = $db->prepare($updateQuery);
+							$updateRes->bindParam(':solved_status', $solvedStatus);
+							$updateRes->bindParam(':thread_id', $threadID);
+							$updateRes->execute();
+							$updateRes = null;
+						}
+
+						/* Get information to mark this thread as solved */
+						$threadQuery = "SELECT starter, solved FROM threads WHERE id=:thread_id LIMIT 1";
+						$threadRes = $db->prepare($threadQuery);
+						$threadRes->bindParam(':thread_id', $threadID);
+						$threadRes->execute();
+
+						while ($row = $threadRes->fetch(PDO::FETCH_ASSOC)) {
+							if ($row['solved'] == 1) {
+								echo '<h2>* SOLVED *</h2>';
+							}
+
+							/* If this person is logged in */
+							if ($logged == "in") {
+								/* If this is the person who started this thread, an admin or a moderator */
+								if ($_SESSION['user_id'] == $row['starter'] || $_SESSION['role_id'] == 3 || $_SESSION['role_id'] == 2) {
+									/* If this thread is not solved */
+									if ($row['solved'] == 0) {
+										/* Give the option to mark this as solved */
+					?>
+						<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+							<input type="submit" name="mark_solved" value="Mark as Solved">
+						</form>
+					<?php
+									} else {
+										/* If this thread has been marked as solved
+										 * give the option to mark it as unsolved */
+					?>
+						<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+							<input type="submit" name="mark_unsolved" value="Mark as Unsolved">
+						</form>
+					<?php
+									}
+								}
+							}
+						}
+
+						$threadRes = null;
+					?>
+					</th>
+				</tr>
+			</thead>
 			<tbody>
 			<?php
 				/* Get the posts in this thread */
