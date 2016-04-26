@@ -1,4 +1,4 @@
-.register-table, .login-table, .profile-table {
+.register-table, .login-table, .profile-table, .user-table{
 	width: 90%;
 	max-width: 30em;
 	margin: 0 auto;
@@ -19,19 +19,19 @@
 	margin: 0 auto;
 	padding: 0;
 }
-.profile-table:first-child {
+.user-table:first-child, .profile-table:first-child {
 	width: 50%;
 }
 td:first-child {
 	width: 25%;
 }
 @media screen and (min-width: 48em) {
-	.login-table, .register-table, .profile-table, .thread-list-table{
+	.login-table, .register-table, .profile-table, .thread-list-table, .user-table{
 		width: 75%;
 	}
 }
 @media screen and (min-width: 60em) {
-	.login-table, .register-table, .profile-table, .thread-list-table{
+	.login-table, .register-table, .profile-table, .thread-list-table, .user-table{
 		width: 50%;
 	}
 }

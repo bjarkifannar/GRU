@@ -65,7 +65,7 @@
 
 			while ($row = $threadRes->fetch(PDO::FETCH_ASSOC)) {
 		?>
-			<tr>
+			<tr class="thread-def">
 				<td>
 					<a href="thread.php?tid=<?php echo $row['thread_id']; ?>"><h3><?php echo $row['thread_name']; ?></h3></a>
 					<a href="user.php?uid=<?php echo $row['starter_id']; ?>"><p><b><?php echo $row['starter_name']; ?></b></p></a>

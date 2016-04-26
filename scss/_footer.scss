@@ -9,14 +9,22 @@ footer {
 		display: flex;
 		justify-content: space-around;
 
-		p, h2{
-			margin: 0;
+		h2{
+			margin: 0 auto;
 			padding-top: 0.5em;
 		}
+		a {
+			color: white;
+		}
+
 
 		.top-right, .top-left {
 			width: 50%;
-			margin-left: 10em;
+			text-align: center;
+			ul {
+				text-align: left;
+				list-style: none;
+			}
 		}
 	}
 	.bottom {

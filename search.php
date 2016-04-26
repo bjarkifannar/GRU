@@ -19,7 +19,7 @@
 			require_once 'inc/header.php';
 		?>
 		<div id="search-bar">
-			<form id="search" method="post" action="search.php">
+			<form id="search" method="get" action="search.php">
 					<input type="text" class="search-text" name="q" size="21" placeholder="Search Here" maxlength="120">
 					<input type="submit" value="search" name="search" class="search-button">
 					<div class="search-radio">
@@ -35,32 +35,35 @@
 				$name_status = 'unchecked';
 				$post_status = 'unchecked';
 
-				if (isset($_POST['search'])) {
-					$selected_radio = $_POST['searched'];
+				if (isset($_GET['search'])) {
+					$selected_radio = $_GET['searched'];
 
-						$q = $_POST['q'];
+						$q = $_GET['q'];
+						$name_link = 'user.php?uid=';
+						$thread_link = 'thread.php?tid=';
 
 					if ($selected_radio == 'thread') {
 						$thread_status = 'checked';
-						$search_query = "SELECT thread_name FROM threads WHERE thread_name LIKE :q ORDER BY thread_name ASC";
+						$search_query = "SELECT thread_name, id FROM threads WHERE thread_name LIKE :q ORDER BY thread_name ASC";
 						$queryRes = $db->prepare($search_query);
 						$queryRes->execute(['q' => "%{$q}%"]);
 
 						while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
-							echo $row['thread_name']. '<br>';
+							echo "<a href='".$thread_link.$row['id']."'>".$row['thread_name']."</a>". "<br>";
 						}
 
 						$queryRes = null; 
 					}
 					else if ($selected_radio == 'name') {
 						$name_status = 'checked';
-						$search_query = "SELECT username FROM users WHERE username LIKE :q ORDER BY username ASC";
+						$search_query = "SELECT username, id FROM users WHERE username LIKE :q ORDER BY username ASC";
 						$queryRes = $db->prepare($search_query);
 						$queryRes->execute(['q' => "%{$q}%"]);
 
 						while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
-							echo $row['username']. '<br>';
+							echo "<a href='".$name_link.$row['id']."'>".$row['username']."</a>". "<br>";
 						}
+						$queryRes = null; 
 					}
 					else if ($selected_radio == 'post'){
 						$post_status = 'checked';
@@ -71,6 +74,7 @@
 						while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
 							echo $row['post_name']. '<br>';
 						}
+						$queryRes = null; 
 					}
 				}
 			?>
