@@ -72,14 +72,6 @@
 						</td>
 					</tr>
 					<tr>
-						<td>
-							<label for="password">Password:*</label>
-						</td>
-						<td>
-							<input type="password" name="password" id="update-password" required>
-						</td>
-					</tr>
-					<tr>
 						<td colspan="2">
 							<input type="Submit" value="update" name="submit-update">
 						</td>
@@ -88,7 +80,19 @@
 			</table>
 		</form>
 		<?php if(isset($_POST['submit-update'])) {
+			$name = $_POST['name'];
+			$email = $_POST['email'];
+			$gender_id = $_POST['gender'];
+			$user_id = $_SESSION['user_id'];
 
+			$updateQuery = "UPDATE users SET name = :name, email = :email, gender_id = :gender_id WHERE id=:id";
+			$updateRes = $db->prepare($updateQuery);
+			$updateRes->bindParam(':name', $name);
+			$updateRes->bindParam(':email', $email);
+			$updateRes->bindParam(':gender_id', $gender_id);
+			$updateRes->bindParam(':id', $user_id);
+			$updateRes->execute();
+			$updateRes = null;
 		} ?>
 		<?php
 			/* Require the footer */

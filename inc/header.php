@@ -16,7 +16,7 @@
 					<?php
 						if ($logged == "in") {
 					?>
-					<li>
+					<li class="user-name-header">
 						<p>Welcome <?php echo $_SESSION['username']; ?>!</p>
 					</li>
 					<li>
