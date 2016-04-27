@@ -1,4 +1,5 @@
-.share-buttons{
+.share-buttons {
+	display: none;
 	position:fixed;
 	width:10em;
 	top:5em;
@@ -19,4 +20,17 @@
 
 .fb-share-button, .twitter-share-button, .g-plus {
 	border-radius: 0;
+}
+
+@media screen and (min-width: 48em) {
+	.share-buttons {
+		display: block;
+	}
+}
+
+/* Big screens */
+@media screen and (min-width: 60em) {
+	.share-buttons {
+		display: block;
+	}
 }
