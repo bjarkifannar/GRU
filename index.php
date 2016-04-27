@@ -46,10 +46,10 @@
 				?>
 				<tr class="forum-setup">
 					<td class="left-side">
-						<h3><a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3><div class="text-dec">This is a test.</div>
+						<h3><a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3><div class="text-dec-Forum-Name">This is a test.</div>
 					</td>
 					<td class="right-side">
-						<a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3>
+						<a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3><div class="text-dec-Last-Post">This is a test.</div>
 					</td>
 				</tr>
 				<?php

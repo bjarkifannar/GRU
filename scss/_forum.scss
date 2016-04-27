@@ -42,9 +42,15 @@
 	border-color: $basecolor;
 }
 
-.text-dec {
+.text-dec-Forum-Name {
 	font-size: 85%;
-	padding-left: 1.8em;
+	padding-left: 2.3em;
+	padding-bottom: 0.5em;
+}
+
+.text-dec-Last-Post {
+	font-size: 85%;
+	padding-left: 1.5em;
 	padding-bottom: 0.5em;
 }
 
@@ -52,6 +58,10 @@ h1 {
 	font-size: 110%;
 	text-align: center;
 	color: $basecolor;
+}
+
+h3 {
+	margin: 0.5em;
 }
 
 /* Medium screens */
