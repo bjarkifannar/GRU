@@ -41,5 +41,42 @@
 			</li>
 		</ul>
 	</nav>
+	<nav class="mobile">
+  		<button class="menu-trigger">&#9776;</button>
+  		<div>
+		    <ul>
+		    	<li>
+					<a href="index.php">Gnome</a>
+				</li>
+				<li>
+					<a href="search.php">Search</a>
+				</li>
+				<?php
+					if ($logged == "in") {
+				?>
+				<li>
+					<p><?php echo $_SESSION['username']; ?>!</p>
+				</li>
+				<li>
+					<a href="logout.php">Log out</a>
+				</li>
+				<li>
+					<a href="profile.php">Profile</a>
+				</li>
+				<?php
+					} else {
+				?>
+				<li>
+						<a href="login.php">Login</a>
+				</li>
+				<li>
+					<a href="register.php">Register</a>
+				</li>
+				<?php
+					}
+				?>
+		    </ul>
+ 		</div>
+	</nav>
 </header>
 <div class="content-wrap">

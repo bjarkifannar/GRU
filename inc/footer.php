@@ -36,6 +36,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script type="text/javascript" src="js/fb_api.js"></script>
 <script type="text/javascript" src="js/media.js" ></script>
+<script type="text/javascript" src="js/hamburger.js"></script>
 
 <?php
 	if (stripos($_SERVER['REQUEST_URI'], 'profile.php')){}
