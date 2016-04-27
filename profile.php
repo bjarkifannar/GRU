@@ -89,6 +89,9 @@
 						<p><?php echo $row['register_time']; ?></p>
 					</td>
 				</tr>
+				<tr>
+					<td colspan="2"><a href="update_user.php">Update User Info</a></td>
+				</tr>
 			</tbody>
 		</table>
 		<?php

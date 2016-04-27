@@ -10,8 +10,9 @@ footer {
 		justify-content: space-around;
 
 		h2{
-			margin: 0 auto;
 			padding-top: 0.5em;
+			margin: 0 auto;
+			width: 50%;
 		}
 		a {
 			color: white;
@@ -22,8 +23,10 @@ footer {
 			width: 50%;
 			text-align: center;
 			ul {
-				text-align: left;
 				list-style: none;
+				width: auto;
+				margin: 1em auto;
+				padding: 0;
 			}
 		}
 	}

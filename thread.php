@@ -140,7 +140,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td class="post-content">
 						<?php echo $row['post_content']; ?>
 						<hr>
 					</td>
