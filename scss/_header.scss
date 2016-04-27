@@ -40,6 +40,7 @@ header {
 
 	.nav-flex-left, .nav-flex-right {
 		width: 50%;
+		border: 0;
 	}
 
 	.nav-flex-left {
@@ -48,6 +49,9 @@ header {
 
 	.nav-flex-right {
 		justify-content: flex-end;
+		p {
+			margin-right: 0.5em;
+		}
 	}
 
 	.nav-left, .nav-right {
@@ -62,15 +66,22 @@ header {
 
 		li {
 			width: auto;
+			border-right: 3px solid #1549A7;
 
 		}
 	}
 
 	.nav-right {
 		justify-content: flex-end;
+		li:last-child {
+			border: 0;
+		}
 	}
 	.nav-left {
 		justify-content: flex-start;
+		li:last-child {
+			border: 0;
+		}
 	}
 }
 

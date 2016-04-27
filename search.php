@@ -21,7 +21,7 @@
 		<div id="search-bar">
 			<form id="search" method="get" action="search.php">
 					<input type="text" class="search-text" name="q" size="21" placeholder="Search Here" maxlength="120">
-					<input type="submit" value="search" name="search" class="search-button">
+					<input type="submit" value="search" name="search" class="search-button"><br>
 					<div class="search-radio">
 						<input type="radio" name="searched" value="thread" checked>Threads
 	  					<input type="radio" name="searched" value="name">Names

@@ -9,6 +9,9 @@
 .thread-def{
 	border-bottom: 1px solid black; 
 }
+.thread-def:last-child {
+	border: 0;
+}
 
 /* Medium screens */
 @media screen and (min-width: 48em) {
