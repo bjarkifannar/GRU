@@ -1,9 +1,9 @@
-
 footer {
 	background-color: $basecolor;
 	color: white;
 	width: 100%;
 	height: 0;
+	
 	.top {
 		background-color: $basecolor * 1.2;
 		display: flex;
@@ -14,10 +14,10 @@ footer {
 			margin: 0 auto;
 			width: 50%;
 		}
+
 		a {
 			color: white;
 		}
-
 
 		.top-right, .top-left {
 			width: 50%;
@@ -30,8 +30,8 @@ footer {
 			}
 		}
 	}
+
 	.bottom {
 		text-align: center;
 	}
 }
-

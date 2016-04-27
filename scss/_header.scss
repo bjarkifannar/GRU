@@ -74,15 +74,21 @@ header {
 
 	.nav-right {
 		justify-content: flex-end;
+<<<<<<< HEAD
 
 		.user-name-header {
 			border: 0;
 		}
 		
+||||||| merged common ancestors
+=======
+		
+>>>>>>> origin/master
 		li:last-child {
 			border: 0;
 		}
 	}
+
 	.nav-left {
 		justify-content: flex-start;
 		
@@ -143,6 +149,7 @@ header {
   	.mobile {
     	display: none;
 	}
+	
 	header {
 		
 		.nav {
