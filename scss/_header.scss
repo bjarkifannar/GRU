@@ -49,6 +49,7 @@ header {
 
 	.nav-flex-right {
 		justify-content: flex-end;
+		
 		p {
 			margin-right: 0.5em;
 		}
@@ -73,12 +74,15 @@ header {
 
 	.nav-right {
 		justify-content: flex-end;
+		
 		li:last-child {
 			border: 0;
 		}
 	}
+
 	.nav-left {
 		justify-content: flex-start;
+		
 		li:last-child {
 			border: 0;
 		}
@@ -90,9 +94,11 @@ header {
   	width: 100%;
   	top: 0;
   	background-color: $basecolor;
+  	
   	div {
   		display: none;
 	}
+	
 	button {
 		position: absolute;
 		outline: 0;
@@ -108,6 +114,7 @@ header {
     	color: white;
     	background: rgba(40,90,2300,.8);
 	}
+	
 	a {
 		display: block;
 		padding-left: 3.5em;
@@ -115,9 +122,11 @@ header {
 		padding-bottom: 0.2em;
 		width: 100%;
 	}
+	
 	p {
 		padding-left: 5.2em;
 	}
+	
 	ul {
 		list-style: none;
 		margin: 0;
@@ -127,10 +136,13 @@ header {
 
 /* Medium screens */
 @media screen and (min-width: 48em) {		//Þegar skjárinn er kominn í 48em (768px), Þá byrtist Hamburger menu og venjulegi er ekki lengur displayed.
+  	
   	.mobile {
     	display: none;
 	}
+	
 	header {
+		
 		.nav {
 			display: flex;
 		}

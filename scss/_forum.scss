@@ -3,14 +3,55 @@
 	margin: 0 auto;
 	padding: 0;
 }
+
 .post-content {
     word-break: break-all;
 }
+
 .thread-def{
 	border-bottom: 1px solid black; 
 }
+
 .thread-def:last-child {
 	border: 0;
+}
+
+.forum-setup {
+	border: 0.1em solid;
+	border-color: $basecolor;
+	
+	td {
+		
+		a {
+			padding-top: 0.5em;
+			padding-bottom: 0.2em;
+			padding-left: 1.2em;
+		}
+	}
+}
+
+.left-side {
+	width: 90%;
+	padding: 0;
+}
+
+.right-side {
+	width: 10%;
+	padding: 0;
+	border: 0.1em solid;
+	border-color: $basecolor;
+}
+
+.text-dec {
+	font-size: 85%;
+	padding-left: 1.8em;
+	padding-bottom: 0.5em;
+}
+
+h1 {
+	font-size: 110%;
+	text-align: center;
+	color: $basecolor;
 }
 
 /* Medium screens */

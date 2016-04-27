@@ -26,19 +26,30 @@
 		<table class="forum-list-table">
 			<thead>
 				<tr>
-					<th>
+					<th colspan="2">
 						<h2>Forums:</h2>
 					</th>
 				</tr>
 			</thead>
 			<tbody>
+				<tr class="forum-setup">	
+					<td class="left-side">
+						<h1>Forum Name</h1>
+					</td>
+					<td class="right-side">
+						<h1>Last Post</h1>
+					</td>
+				</tr>
 				<?php
 					/* Fetch the forums and show them */
 					while ($row = $forumRes->fetch(PDO::FETCH_ASSOC)) {
 				?>
-				<tr>
-					<td>
-						<h3><a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3>
+				<tr class="forum-setup">
+					<td class="left-side">
+						<h3><a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3><div class="text-dec">This is a test.</div>
+					</td>
+					<td class="right-side">
+						<a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3>
 					</td>
 				</tr>
 				<?php

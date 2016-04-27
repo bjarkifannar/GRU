@@ -7,29 +7,34 @@
 	input, select {
 		width: 100%;
 	}
+
 	input[type='button'] {
 		margin-top: 0.5em;
 		padding: 0.5em;
 	}
-
 }
+
 .thread-list-table {
 	align: center;
 	width: 90%;
 	margin: 0 auto;
 	padding: 0;
 }
+
 .user-table:first-child, .profile-table:first-child {
 	width: 50%;
 }
+
 td:first-child {
 	width: 25%;
 }
+
 @media screen and (min-width: 48em) {
 	.login-table, .register-table, .profile-table, .thread-list-table, .user-table{
 		width: 75%;
 	}
 }
+
 @media screen and (min-width: 60em) {
 	.login-table, .register-table, .profile-table, .thread-list-table, .user-table{
 		width: 50%;
