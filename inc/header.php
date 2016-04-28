@@ -55,9 +55,6 @@
 					if ($logged == "in") {
 				?>
 				<li>
-					<p><?php echo $_SESSION['username']; ?>!</p>
-				</li>
-				<li>
 					<a href="logout.php">Log out</a>
 				</li>
 				<li>
