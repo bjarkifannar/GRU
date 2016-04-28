@@ -53,7 +53,7 @@
 				<tbody>
 				<?php
 					while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
-						echo "<tr><td><a href='".$thread_link.$row['id']."'>".$row['thread_name']."</a></td></tr>";
+						echo "<tr><td class='search-output'><a href='".$thread_link.$row['id']."'>".$row['thread_name']."</a></td></tr>";
 					}
 				?>
 				</tbody>
@@ -72,7 +72,7 @@
 					<?php
 
 						while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
-							echo "<tr><td><a href='".$name_link.$row['id']."'>".$row['username']."</a></td></tr>";
+							echo "<tr><td class='search-output'><a href='".$name_link.$row['id']."'>".$row['username']."</a></td></tr>";
 						}
 					?>
 					</tbody>
@@ -92,7 +92,7 @@
 					<?php
 
 						while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
-							echo "<tr><td>" .$row['post_name']."</td></tr>";
+							echo "<tr><td class='search-output'>" .$row['post_name']."</td></tr>";
 						}
 					?>
 					</tbody>

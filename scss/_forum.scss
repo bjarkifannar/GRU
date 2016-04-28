@@ -1,4 +1,4 @@
-.forum-list-table, .forum-category-table {
+.forum-list-table, .forum-category-table, .add-category-table {
 	width: 90%;
 	margin: 0 auto;
 	padding: 0;
@@ -25,6 +25,9 @@
 
 .thread-def:last-child {
 	border: 0;
+}
+.thread-reply-title, .thread-reply-button{
+	width: 100%;
 }
 
 .forum-setup {
@@ -72,17 +75,33 @@ h1 {
 	color: $basecolor;
 }
 
+.add-category-table {
+	width: 100%;
+	input {
+		width: 100%;
+	}
+	textarea {
+		width: 100%;
+		resize: none;
+	}
+}
+
+.add-thread-button, .add-thread-title {
+	margin: 1em 0;
+	width: 100%;
+}
+
 
 /* Medium screens */
 @media screen and (min-width: 48em) {
-	.forum-list-table, .forum-category-table, .thread-table {
+	.forum-list-table, .forum-category-table, .thread-table, .add-category-table{
 		width: 75%;
 	}
 }
 
 /* Big screens */
 @media screen and (min-width: 60em) {
-	.forum-list-table, .forum-category-table, .thread-table {
+	.forum-list-table, .forum-category-table, .thread-table, .add-category-table{
 		width: 50%;
 	}
 }

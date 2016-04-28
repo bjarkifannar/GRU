@@ -205,7 +205,7 @@
 				<tbody>
 					<tr>
 						<td>
-							<input type="text" name="reply_title" placeholder="Title" required>
+							<input type="text" name="reply_title" placeholder="Title" class="thread-reply-title" required>
 						</td>
 					</tr>
 					<tr>
@@ -215,7 +215,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="submit" name="submit_reply" value="Submit">
+							<input type="submit" name="submit_reply" value="Submit" class="thread-reply-button">
 						</td>
 					</tr>
 				</tbody>

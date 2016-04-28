@@ -54,10 +54,17 @@
 	display: inline-block;
 }
 
+.search-output{
+	border-bottom: 1px solid black;
+	padding: 1em 0;
+}
+
 .search-table {
 	margin: 0 auto;
 	width: 90%;
 }
+
+
 
 @media screen and (min-width: 48em) {
 	

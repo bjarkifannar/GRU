@@ -113,9 +113,9 @@
 		?>
 		<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" style="width: 50%; margin: 0 auto;">
 			<br>
-			<input type="text" name="thread_title" placeholder="Title" required><br><br>
+			<input type="text" name="thread_title" placeholder="Title" class="add-thread-title" required><br><br>
 			<textarea name="editor" id="thread_editor"></textarea>
-			<input type="submit" name="submit" value="Submit">
+			<input type="submit" name="submit" value="Submit" class="add-thread-button">
 		</form>
 		<?php
 			/* Require the footer */
