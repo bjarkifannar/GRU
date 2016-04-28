@@ -3,6 +3,17 @@
 	margin: 0 auto;
 	padding: 0;
 }
+.forum-list-table {
+	h3 {
+		margin: 0.5em;
+	}
+	margin-bottom: 2.3em;
+}
+
+.thread-table {
+	width: 90%; 
+	margin: 0 auto;
+}
 
 .post-content {
     word-break: break-all;
@@ -44,14 +55,15 @@
 
 .text-dec-Forum-Name {
 	font-size: 85%;
-	padding-left: 2.3em;
+	text-indent: 2.3em;
 	padding-bottom: 0.5em;
 }
 
 .text-dec-Last-Post {
 	font-size: 85%;
-	padding-left: 1.5em;
+	text-indent: 1.5em;
 	padding-bottom: 0.5em;
+
 }
 
 h1 {
@@ -60,20 +72,17 @@ h1 {
 	color: $basecolor;
 }
 
-h3 {
-	margin: 0.5em;
-}
 
 /* Medium screens */
 @media screen and (min-width: 48em) {
-	.forum-list-table, .forum-category-table {
+	.forum-list-table, .forum-category-table, .thread-table {
 		width: 75%;
 	}
 }
 
 /* Big screens */
 @media screen and (min-width: 60em) {
-	.forum-list-table, .forum-category-table {
+	.forum-list-table, .forum-category-table, .thread-table {
 		width: 50%;
 	}
 }

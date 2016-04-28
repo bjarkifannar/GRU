@@ -101,6 +101,10 @@ header {
   	
   	div {
   		display: none;
+  		position: fixed;
+  		top: 2.5em;
+  		width: 100%;
+  		background-color: $basecolor;
 	}
 	
 	button {
@@ -112,7 +116,9 @@ header {
     	left: 0;
     	border: 1px;
     	height: 3em;
-    	width: 3em;
+    	width: 100%;
+    	text-align: left;
+    	padding-left: 1.5em;
     	cursor: pointer;
     	overflow: hidden;
     	color: white;
@@ -137,12 +143,23 @@ header {
 		padding: 0;
 	}
 }
+.mobile-fixer {
+	display: block;
+	height: 1.8em;
+}
+.hamburger-end {
+	background: rgba(40,90,2300,.8);
+}
 
 /* Medium screens */
 @media screen and (min-width: 48em) {		//Þegar skjárinn er kominn í 48em (768px), Þá byrtist Hamburger menu og venjulegi er ekki lengur displayed.
   	
   	.mobile {
     	display: none;
+	}
+	.mobile-fixer {
+		display: none;
+		height: 0;
 	}
 	
 	header {

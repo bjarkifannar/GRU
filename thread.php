@@ -28,7 +28,7 @@
 			/* Require the header */
 			require_once 'inc/header.php';
 		?>
-		<table class="thread-table" style="width: 50%; margin: 0 auto;">
+		<table class="thread-table">
 			<thead>
 				<tr>
 					<th>

@@ -67,11 +67,12 @@
 					} else {
 				?>
 				<li>
-						<a href="login.php">Login</a>
+					<a href="login.php">Login</a>
 				</li>
 				<li>
 					<a href="register.php">Register</a>
 				</li>
+				<li class="hamburger-end"><p></p></li>
 				<?php
 					}
 				?>
@@ -79,4 +80,5 @@
  		</div>
 	</nav>
 </header>
+<div class="mobile-fixer"></div>
 <div class="content-wrap">

@@ -29,6 +29,7 @@
 					</div>
 			</form>
 			<div class="search-clear"></div>
+		</div>
 			<?PHP
 
 				$thread_status = 'unchecked';
@@ -47,11 +48,17 @@
 						$search_query = "SELECT thread_name, id FROM threads WHERE thread_name LIKE :q ORDER BY thread_name ASC";
 						$queryRes = $db->prepare($search_query);
 						$queryRes->execute(['q' => "%{$q}%"]);
-
-						while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
-							echo "<a href='".$thread_link.$row['id']."'>".$row['thread_name']."</a>". "<br>";
-						}
-
+			?>
+			<table class="search-table">
+				<tbody>
+				<?php
+					while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
+						echo "<tr><td><a href='".$thread_link.$row['id']."'>".$row['thread_name']."</a></td></tr>";
+					}
+				?>
+				</tbody>
+			</table>
+			<?php
 						$queryRes = null; 
 					}
 					else if ($selected_radio == 'name') {
@@ -59,10 +66,18 @@
 						$search_query = "SELECT username, id FROM users WHERE username LIKE :q ORDER BY username ASC";
 						$queryRes = $db->prepare($search_query);
 						$queryRes->execute(['q' => "%{$q}%"]);
+				?>
+				<table class="search-table">
+					<tbody>
+					<?php
 
 						while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
-							echo "<a href='".$name_link.$row['id']."'>".$row['username']."</a>". "<br>";
+							echo "<tr><td><a href='".$name_link.$row['id']."'>".$row['username']."</a></td></tr>";
 						}
+					?>
+					</tbody>
+				</table>
+				<?php
 						$queryRes = null; 
 					}
 					else if ($selected_radio == 'post'){
@@ -71,14 +86,23 @@
 						$queryRes = $db->prepare($search_query);
 						$queryRes->execute(['q' => "%{$q}%"]);
 
+				?>
+				<table class="search-table">
+					<tbody>
+					<?php
+
 						while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
-							echo $row['post_name']. '<br>';
+							echo "<tr><td>" .$row['post_name']."</td></tr>";
 						}
+					?>
+					</tbody>
+				</table>
+				<?php
 						$queryRes = null; 
 					}
 				}
 			?>
-		</div>
+
 		<?php
 			/* Require the footer */
 			require_once 'inc/footer.php';
