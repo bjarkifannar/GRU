@@ -63,6 +63,7 @@
 				<li>
 					<a href="profile.php">Profile</a>
 				</li>
+				<li class="hamburger-end"><p></p></li>
 				<?php
 					} else {
 				?>

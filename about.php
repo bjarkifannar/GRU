@@ -3,7 +3,7 @@
 	require_once 'core/db_connect.php';
 	
 	/* Set the page name for the title */
-	$pageName = "_page_name_goes_here_";
+	$pageName = "About";
 ?>
 <!DOCTYPE html>
 <html>
