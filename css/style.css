@@ -229,14 +229,14 @@ h1 {
 @media screen and (min-width: 60em) {
   .forum-list-table, .forum-category-table, .thread-table, .add-category-table {
     width: 50%; } }
-.register-table, .login-table, .profile-table, .user-table, .update-table {
+.register-table, .login-table, .profile-table, .user-table, .update-table, .user-image-table {
   width: 90%;
   max-width: 30em;
   margin: 0 auto;
   padding: 0; }
-.register-table input, .register-table select, .login-table input, .login-table select, .profile-table input, .profile-table select, .user-table input, .user-table select, .update-table input, .update-table select {
+.register-table input, .register-table select, .login-table input, .login-table select, .profile-table input, .profile-table select, .user-table input, .user-table select, .update-table input, .update-table select, .user-image-table input, .user-image-table select {
   width: 100%; }
-.register-table input[type='button'], .login-table input[type='button'], .profile-table input[type='button'], .user-table input[type='button'], .update-table input[type='button'] {
+.register-table input[type='button'], .login-table input[type='button'], .profile-table input[type='button'], .user-table input[type='button'], .update-table input[type='button'], .user-image-table input[type='button'] {
   margin-top: 0.5em;
   padding: 0.5em; }
 
@@ -245,6 +245,10 @@ h1 {
   width: 90%;
   margin: 0 auto;
   padding: 0; }
+
+.user-image img {
+  border: 2px solid black;
+  border-radius: 50%; }
 
 .user-table:first-child, .profile-table:first-child {
   width: 50%; }
@@ -314,6 +318,8 @@ td:first-child {
 .search-table {
   margin: 0 auto;
   width: 90%; }
+.search-table td:first-child {
+  width: 10%; }
 
 @media screen and (min-width: 48em) {
   .search-text {

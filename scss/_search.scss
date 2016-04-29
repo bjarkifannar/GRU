@@ -62,6 +62,9 @@
 .search-table {
 	margin: 0 auto;
 	width: 90%;
+	td:first-child {
+		width: 10%;
+	}
 }
 
 

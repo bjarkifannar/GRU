@@ -20,6 +20,7 @@
 
 			/* Get the users information */
 			$username = $_SESSION['username'];
+			$user_id = $_SESSION['user_id'];
 
 			$userQuery = "SELECT users.name AS user_name,
 									users.email AS user_email,
@@ -94,11 +95,33 @@
 				</tr>
 			</tbody>
 		</table>
+			<?php 
+				$image_query = "SELECT id, profile_img FROM users WHERE id = :user_id";
+					$imageRes = $db->prepare($image_query);
+					$imageRes->bindParam(':user_id', $user_id);
+					$imageRes->execute();
+			?>
+			<table class="user-image-table">
+				<tbody>
+				<?php
+					while ($row = $imageRes->fetch(PDO::FETCH_ASSOC)) {
+						if (is_null('profile_img')) {
+							echo "<tr><td class='user-image'><img src=img/default-user-image.png width='200' height='200'/></td></tr>";
+						}
+						else {
+							echo "<tr><td class='user-image'><img src=img/".$row['profile_img']." width='200' height='200'/></td></tr>";
+						}
+					}
+				?>
+				<tr><td><a href="upload_profile_img.php">Here you change you profile picture</a></td></tr>
+				</tbody>
+			</table>
 		<?php
 			}
 
 			/* Empty the userRes variable to free memory */
 			$userRes = null;
+			$imageRes = null;
 		?>
 		<?php
 			/* Require the footer */

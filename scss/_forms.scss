@@ -1,4 +1,4 @@
-.register-table, .login-table, .profile-table, .user-table, .update-table {
+.register-table, .login-table, .profile-table, .user-table, .update-table, .user-image-table{
 	width: 90%;
 	max-width: 30em;
 	margin: 0 auto;
@@ -19,6 +19,12 @@
 	width: 90%;
 	margin: 0 auto;
 	padding: 0;
+}
+.user-image {
+	img {
+		border: 2px solid black;
+		border-radius: 50%;
+	}
 }
 
 .user-table:first-child, .profile-table:first-child {
