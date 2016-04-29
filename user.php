@@ -154,6 +154,25 @@
 						if ($_SESSION['role_id'] == 3) {
 				?>
 				<tr>
+				<tr>
+					<?php
+						if ($logged == "in") {$user_id = $_SESSION['user_id'];}	
+
+						$image_query = "SELECT id, profile_img FROM users WHERE id = :user_id";
+						$imageRes = $db->prepare($image_query);
+						$imageRes->bindParam(':user_id', $user_id);
+						$imageRes->execute();
+
+						while ($row = $imageRes->fetch(PDO::FETCH_ASSOC)) {
+							if (is_null($row['profile_img'])) {
+								echo "<td class='user-image'><img src=img/default-user-image.png width='200' height='200'/></td>";
+							}
+							else {
+								echo "<td class='user-image'><img src=img/".$row['profile_img']." width='200' height='200'/></td>";
+							}
+						}
+					?>
+				</tr>
 					<td>
 						<p><b>Banned until:</b></p>
 					</td>

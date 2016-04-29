@@ -105,7 +105,7 @@
 				<tbody>
 				<?php
 					while ($row = $imageRes->fetch(PDO::FETCH_ASSOC)) {
-						if (is_null('profile_img')) {
+						if (is_null($row['profile_img'])) {
 							echo "<tr><td class='user-image'><img src=img/default-user-image.png width='200' height='200'/></td></tr>";
 						}
 						else {
