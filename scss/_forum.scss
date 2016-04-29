@@ -4,6 +4,7 @@
 	padding: 0;
 }
 .forum-list-table {
+	
 	h3 {
 		margin: 0.5em;
 	}
@@ -35,36 +36,38 @@
 	border-color: $basecolor;
 	
 	td {
-		
+
 		a {
 			padding-top: 0.5em;
 			padding-bottom: 0.2em;
-			padding-left: 1.2em;
+			margin: 0 auto;
 		}
 	}
 }
 
 .left-side {
-	width: 90%;
+	width: 95%;
+	font-size: 85%; 
 	padding: 0;
 }
 
 .right-side {
 	width: 10%;
 	padding: 0;
+	font-size: 90%;
 	border: 0.1em solid;
 	border-color: $basecolor;
 }
 
 .text-dec-Forum-Name {
 	font-size: 85%;
-	text-indent: 2.3em;
 	padding-bottom: 0.5em;
+	margin-left: 0.8em;
 }
 
 .text-dec-Last-Post {
 	font-size: 85%;
-	text-indent: 1.5em;
+	margin-left: 0.8em;
 	padding-bottom: 0.5em;
 
 }
@@ -77,9 +80,11 @@ h1 {
 
 .add-category-table {
 	width: 100%;
+	
 	input {
 		width: 100%;
 	}
+	
 	textarea {
 		width: 100%;
 		resize: none;
@@ -90,7 +95,6 @@ h1 {
 	margin: 1em 0;
 	width: 100%;
 }
-
 
 /* Medium screens */
 @media screen and (min-width: 48em) {

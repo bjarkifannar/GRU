@@ -44,12 +44,12 @@
 					/* Fetch the forums and show them */
 					while ($row = $forumRes->fetch(PDO::FETCH_ASSOC)) {
 				?>
-				<tr class="forum-setup">
+				<tr class="forum-setup">	
 					<td class="left-side">
-						<h3><a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3><div class="text-dec-Forum-Name">This is a test.</div>
+						<h3><a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3><div class="text-dec-Forum-Name">This is a test text for forum description.</div>
 					</td>
 					<td class="right-side">
-						<a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3><div class="text-dec-Last-Post">This is a test.</div>
+						<h3><a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3><div class="text-dec-Last-Post">Poster: <a href="*">TestPoster</a></div>
 					</td>
 				</tr>
 				<?php
