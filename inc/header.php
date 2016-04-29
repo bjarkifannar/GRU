@@ -55,20 +55,20 @@
 					if ($logged == "in") {
 				?>
 				<li>
-					<a href="logout.php">Log out</a>
+					<a href="profile.php">Profile</a>
 				</li>
 				<li>
-					<a href="profile.php">Profile</a>
+					<a href="logout.php">Log out</a>
 				</li>
 				<li class="hamburger-end"><p></p></li>
 				<?php
 					} else {
 				?>
 				<li>
-					<a href="login.php">Login</a>
+					<a href="register.php">Register</a>
 				</li>
 				<li>
-					<a href="register.php">Register</a>
+					<a href="login.php">Login</a>
 				</li>
 				<li class="hamburger-end"><p></p></li>
 				<?php
