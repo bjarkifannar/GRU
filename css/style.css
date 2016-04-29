@@ -146,7 +146,8 @@ footer .top .top-right ul, footer .top .top-left ul {
   margin: 1em auto;
   padding: 0; }
 footer .bottom {
-  text-align: center; }
+  text-align: center;
+  font-size: 75%; }
 
 .forum-list-table, .forum-category-table, .add-category-table {
   width: 90%;
