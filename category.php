@@ -11,6 +11,8 @@
 	$showOnlySolved = FALSE;
 	$showOnlyUnsolved = FALSE;
 	$solvedValue = null;
+	$orderThreads = FALSE;
+	$orderValue = null;
 
 	/* If the category ID is not set then redirect to the index */
 	if (!isset($_GET['cid'])) {
@@ -30,6 +32,16 @@
 			/* Show only unsolved threads */
 			$showOnlyUnsolved = TRUE;
 			$solvedValue = 0;
+		}
+	}
+
+	/* If the order variable is set */
+	if (isset($_GET['order'])) {
+		/* If the order value is valid */
+		if ($_GET['order'] == "title_asc" || $_GET['order'] == "title_desc" || $_GET['order'] == "post_time_asc" || $_GET['order'] == "post_time_desc") {
+			/* Set the order value */
+			$orderValue = $_GET['order'];
+			$orderThreads = TRUE;
 		}
 	}
 ?>
@@ -82,52 +94,253 @@
 						<a href="category.php?cid=<?php echo $categoryID; ?>">Show all</a>
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<?php
+							if (isset($_GET['solved'])) {
+								$currentURL = "category.php?cid=$categoryID&solved=$solvedValue";
+							} else {
+								$currentURL = "category.php?cid=$categoryID";
+							}
+						?>
+						<p>Order by: <a href="<?php echo $currentURL; ?>&order=title_asc">Title A-Z</a> | <a href="<?php echo $currentURL; ?>&order=title_desc">Title Z-A</a> | <a href="<?php echo $currentURL; ?>&order=post_time_desc">Post Time (Newest First)</a> | <a href="<?php echo $currentURL; ?>&order=post_time_asc">Post Time (Oldest First)</a></p>
+					</td>
+				</tr>
 		<?php
 			/* If show only solved is true */
 			if ($showOnlySolved) {
-				/* Get all the threads in this category that are solved */
-				$threadQuery = "SELECT threads.id AS thread_id,
-										threads.thread_name AS thread_name,
-										threads.starter AS starter_id,
-										users.username AS starter_name
-											FROM threads
-												INNER JOIN users
-													ON threads.starter=users.id
-												WHERE threads.category_id=:cat_id
-													AND solved=:solved_value";
-				$threadRes = $db->prepare($threadQuery);
-				$threadRes->bindParam(':cat_id', $categoryID);
-				$threadRes->bindParam(':solved_value', $solvedValue);
-				$threadRes->execute();
+				/* If the threads should be ordered */
+				if ($orderThreads) {
+					/* If the threads should be ordered by title */
+					if ($orderValue == "title_asc") {
+						/* Get all the threads in this category that are solved and order them by title A-Z */
+						$threadQuery = "SELECT threads.id AS thread_id,
+												threads.thread_name AS thread_name,
+												threads.starter AS starter_id,
+												users.username AS starter_name
+													FROM threads
+														INNER JOIN users
+															ON threads.starter=users.id
+														WHERE threads.category_id=:cat_id
+															AND solved=:solved_value
+																ORDER BY threads.thread_name ASC";
+						$threadRes = $db->prepare($threadQuery);
+						$threadRes->bindParam(':cat_id', $categoryID);
+						$threadRes->bindParam(':solved_value', $solvedValue);
+						$threadRes->execute();
+					} else if ($orderValue == "title_desc") {
+						/* Get all the threads in this category that are solved and order them by title Z-A */
+						$threadQuery = "SELECT threads.id AS thread_id,
+												threads.thread_name AS thread_name,
+												threads.starter AS starter_id,
+												users.username AS starter_name
+													FROM threads
+														INNER JOIN users
+															ON threads.starter=users.id
+														WHERE threads.category_id=:cat_id
+															AND solved=:solved_value
+																ORDER BY threads.thread_name DESC";
+						$threadRes = $db->prepare($threadQuery);
+						$threadRes->bindParam(':cat_id', $categoryID);
+						$threadRes->bindParam(':solved_value', $solvedValue);
+						$threadRes->execute();
+					} else if ($orderValue == "post_time_asc") {
+						/* Get all the threads in this category that are solved and order them by post time */
+						$threadQuery = "SELECT threads.id AS thread_id,
+												threads.thread_name AS thread_name,
+												threads.starter AS starter_id,
+												users.username AS starter_name
+													FROM threads
+														INNER JOIN users
+															ON threads.starter=users.id
+														WHERE threads.category_id=:cat_id
+															AND solved=:solved_value
+																ORDER BY threads.post_time ASC";
+						$threadRes = $db->prepare($threadQuery);
+						$threadRes->bindParam(':cat_id', $categoryID);
+						$threadRes->bindParam(':solved_value', $solvedValue);
+						$threadRes->execute();
+					} else if ($orderValue == "post_time_desc") {
+						/* Get all the threads in this category that are solved and order them by post time */
+						$threadQuery = "SELECT threads.id AS thread_id,
+												threads.thread_name AS thread_name,
+												threads.starter AS starter_id,
+												users.username AS starter_name
+													FROM threads
+														INNER JOIN users
+															ON threads.starter=users.id
+														WHERE threads.category_id=:cat_id
+															AND solved=:solved_value
+																ORDER BY threads.post_time DESC";
+						$threadRes = $db->prepare($threadQuery);
+						$threadRes->bindParam(':cat_id', $categoryID);
+						$threadRes->bindParam(':solved_value', $solvedValue);
+						$threadRes->execute();
+					}
+				} else {
+					/* Get all the threads in this category that are solved */
+					$threadQuery = "SELECT threads.id AS thread_id,
+											threads.thread_name AS thread_name,
+											threads.starter AS starter_id,
+											users.username AS starter_name
+												FROM threads
+													INNER JOIN users
+														ON threads.starter=users.id
+													WHERE threads.category_id=:cat_id
+														AND solved=:solved_value";
+					$threadRes = $db->prepare($threadQuery);
+					$threadRes->bindParam(':cat_id', $categoryID);
+					$threadRes->bindParam(':solved_value', $solvedValue);
+					$threadRes->execute();
+				}
 			} else if ($showOnlyUnsolved) {
-				/* If show only unsolved is true */
-				/* Get all the threads in this category that are unsolved */
-				$threadQuery = "SELECT threads.id AS thread_id,
-										threads.thread_name AS thread_name,
-										threads.starter AS starter_id,
-										users.username AS starter_name
-											FROM threads
-												INNER JOIN users
-													ON threads.starter=users.id
-												WHERE threads.category_id=:cat_id
-													AND solved=:solved_value";
-				$threadRes = $db->prepare($threadQuery);
-				$threadRes->bindParam(':cat_id', $categoryID);
-				$threadRes->bindParam(':solved_value', $solvedValue);
-				$threadRes->execute();
+				if ($orderThreads) {
+					if ($orderValue == "title_asc") {
+						$threadQuery = "SELECT threads.id AS thread_id,
+												threads.thread_name AS thread_name,
+												threads.starter AS starter_id,
+												users.username AS starter_name
+													FROM threads
+														INNER JOIN users
+															ON threads.starter=users.id
+														WHERE threads.category_id=:cat_id
+															AND solved=:solved_value
+																ORDER BY threads.thread_name ASC";
+						$threadRes = $db->prepare($threadQuery);
+						$threadRes->bindParam(':cat_id', $categoryID);
+						$threadRes->bindParam(':solved_value', $solvedValue);
+						$threadRes->execute();
+					} else if ($orderValue == "title_desc") {
+						$threadQuery = "SELECT threads.id AS thread_id,
+												threads.thread_name AS thread_name,
+												threads.starter AS starter_id,
+												users.username AS starter_name
+													FROM threads
+														INNER JOIN users
+															ON threads.starter=users.id
+														WHERE threads.category_id=:cat_id
+															AND solved=:solved_value
+																ORDER BY threads.thread_name DESC";
+						$threadRes = $db->prepare($threadQuery);
+						$threadRes->bindParam(':cat_id', $categoryID);
+						$threadRes->bindParam(':solved_value', $solvedValue);
+						$threadRes->execute();
+					} else if ($orderValue == "post_time_asc") {
+						$threadQuery = "SELECT threads.id AS thread_id,
+												threads.thread_name AS thread_name,
+												threads.starter AS starter_id,
+												users.username AS starter_name
+													FROM threads
+														INNER JOIN users
+															ON threads.starter=users.id
+														WHERE threads.category_id=:cat_id
+															AND solved=:solved_value
+																ORDER BY threads.post_time ASC";
+						$threadRes = $db->prepare($threadQuery);
+						$threadRes->bindParam(':cat_id', $categoryID);
+						$threadRes->bindParam(':solved_value', $solvedValue);
+						$threadRes->execute();
+					} else if ($orderValue == "post_time_desc") {
+						$threadQuery = "SELECT threads.id AS thread_id,
+												threads.thread_name AS thread_name,
+												threads.starter AS starter_id,
+												users.username AS starter_name
+													FROM threads
+														INNER JOIN users
+															ON threads.starter=users.id
+														WHERE threads.category_id=:cat_id
+															AND solved=:solved_value
+																ORDER BY threads.post_time DESC";
+						$threadRes = $db->prepare($threadQuery);
+						$threadRes->bindParam(':cat_id', $categoryID);
+						$threadRes->bindParam(':solved_value', $solvedValue);
+						$threadRes->execute();
+					}
+				} else {
+					/* Get all the threads in this category that are unsolved */
+					$threadQuery = "SELECT threads.id AS thread_id,
+											threads.thread_name AS thread_name,
+											threads.starter AS starter_id,
+											users.username AS starter_name
+												FROM threads
+													INNER JOIN users
+														ON threads.starter=users.id
+													WHERE threads.category_id=:cat_id
+														AND solved=:solved_value";
+					$threadRes = $db->prepare($threadQuery);
+					$threadRes->bindParam(':cat_id', $categoryID);
+					$threadRes->bindParam(':solved_value', $solvedValue);
+					$threadRes->execute();
+				}
 			} else {
-				/* Get all the threads in this category */
-				$threadQuery = "SELECT threads.id AS thread_id,
-										threads.thread_name AS thread_name,
-										threads.starter AS starter_id,
-										users.username AS starter_name
-											FROM threads
-												INNER JOIN users
-													ON threads.starter=users.id
-											WHERE threads.category_id=:cat_id";
-				$threadRes = $db->prepare($threadQuery);
-				$threadRes->bindParam(':cat_id', $categoryID);
-				$threadRes->execute();
+				if ($orderThreads) {
+					if ($orderValue == "title_asc") {
+						$threadQuery = "SELECT threads.id AS thread_id,
+												threads.thread_name AS thread_name,
+												threads.starter AS starter_id,
+												users.username AS starter_name
+													FROM threads
+														INNER JOIN users
+															ON threads.starter=users.id
+													WHERE threads.category_id=:cat_id
+														ORDER BY threads.thread_name ASC";
+						$threadRes = $db->prepare($threadQuery);
+						$threadRes->bindParam(':cat_id', $categoryID);
+						$threadRes->execute();
+					} else if ($orderValue == "title_desc") {
+						$threadQuery = "SELECT threads.id AS thread_id,
+												threads.thread_name AS thread_name,
+												threads.starter AS starter_id,
+												users.username AS starter_name
+													FROM threads
+														INNER JOIN users
+															ON threads.starter=users.id
+													WHERE threads.category_id=:cat_id
+														ORDER BY threads.thread_name DESC";
+						$threadRes = $db->prepare($threadQuery);
+						$threadRes->bindParam(':cat_id', $categoryID);
+						$threadRes->execute();
+					} else if ($orderValue == "post_time_asc") {
+						$threadQuery = "SELECT threads.id AS thread_id,
+												threads.thread_name AS thread_name,
+												threads.starter AS starter_id,
+												users.username AS starter_name
+													FROM threads
+														INNER JOIN users
+															ON threads.starter=users.id
+													WHERE threads.category_id=:cat_id
+														ORDER BY threads.post_time ASC";
+						$threadRes = $db->prepare($threadQuery);
+						$threadRes->bindParam(':cat_id', $categoryID);
+						$threadRes->execute();
+					} else if ($orderValue == "post_time_desc") {
+						$threadQuery = "SELECT threads.id AS thread_id,
+												threads.thread_name AS thread_name,
+												threads.starter AS starter_id,
+												users.username AS starter_name
+													FROM threads
+														INNER JOIN users
+															ON threads.starter=users.id
+													WHERE threads.category_id=:cat_id
+														ORDER BY threads.post_time DESC";
+						$threadRes = $db->prepare($threadQuery);
+						$threadRes->bindParam(':cat_id', $categoryID);
+						$threadRes->execute();
+					}
+				} else {
+					/* Get all the threads in this category */
+					$threadQuery = "SELECT threads.id AS thread_id,
+											threads.thread_name AS thread_name,
+											threads.starter AS starter_id,
+											users.username AS starter_name
+												FROM threads
+													INNER JOIN users
+														ON threads.starter=users.id
+												WHERE threads.category_id=:cat_id";
+					$threadRes = $db->prepare($threadQuery);
+					$threadRes->bindParam(':cat_id', $categoryID);
+					$threadRes->execute();
+				}
 			}
 
 			while ($row = $threadRes->fetch(PDO::FETCH_ASSOC)) {
