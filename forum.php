@@ -3,6 +3,8 @@
 	require_once 'core/db_connect.php';
 
 	$forumID = null;
+	$canRemoveCategory = FALSE;
+	$userID = null;
 	
 	/* Set the page name for the title */
 	$pageName = "Forum";
@@ -32,6 +34,28 @@
 		<?php
 			/* Require the header */
 			require_once 'inc/header.php';
+
+			/* If this user is logged in */
+			if ($logged == "in") {
+				/* Get the user ID */
+				$userID = $_SESSION['user_id'];
+
+				/* Check if this user can remove categories */
+				$userRoleQuery = "SELECT role_id FROM users WHERE id=:user_id LIMIT 1";
+				$userRoleRes = $db->prepare($userRoleQuery);
+				$userRoleRes->bindParam(':user_id', $userID);
+				$userRoleRes->execute();
+
+				while ($row = $userRoleRes->fetch(PDO::FETCH_ASSOC)) {
+					/* If the user is an admin */
+					if ($row['role_id'] == 3) {
+						/* This user can remove categories */
+						$canRemoveCategory = TRUE;
+					}
+				}
+
+				$userRoleRes = null;
+			}
 		?>
 		<table class="forum-category-table">
 			<thead>
@@ -50,6 +74,14 @@
 					<td>
 						<a href="category.php?cid=<?php echo $row['id']; ?>"><h3><?php echo $row['category_name']; ?></h3></a>
 						<p><?php echo $row['category_desc']; ?></p>
+				<?php
+						/* If the user can remove categories */
+						if ($canRemoveCategory) {
+				?>
+				<a href="remove_category.php?cid=<?php echo $row['id']; ?>">Remove Category</a>
+				<?php
+						}
+				?>
 					</td>
 				</tr>
 				<?php
