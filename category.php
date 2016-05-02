@@ -5,15 +5,32 @@
 	/* Set the page name for the title */
 	$pageName = "Category";
 
-	/* The category ID */
+	/* Variables */
 	$categoryID = null;
 	$categoryName = null;
+	$showOnlySolved = FALSE;
+	$showOnlyUnsolved = FALSE;
+	$solvedValue = null;
 
 	/* If the category ID is not set then redirect to the index */
 	if (!isset($_GET['cid'])) {
 		header('Location: index.php');
 	} else {
 		$categoryID = $_GET['cid'];
+	}
+
+	/* If the solved variable is set */
+	if (isset($_GET['solved'])) {
+		/* If the solved variable is = 1 */
+		if ($_GET['solved'] == 1) {
+			/* Show only solved threads */
+			$showOnlySolved = TRUE;
+			$solvedValue = 1;
+		} else if ($_GET['solved'] == 0) {
+			/* Show only unsolved threads */
+			$showOnlyUnsolved = TRUE;
+			$solvedValue = 0;
+		}
 	}
 ?>
 <!DOCTYPE html>
@@ -49,19 +66,69 @@
 					</th>
 				</tr>
 			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<a href="category.php?cid=<?php echo $categoryID; ?>&solved=1">Show only solved</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="category.php?cid=<?php echo $categoryID; ?>&solved=0">Show only unsolved</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="category.php?cid=<?php echo $categoryID; ?>">Show all</a>
+					</td>
+				</tr>
 		<?php
-			/* Get all the threads in this category */
-			$threadQuery = "SELECT threads.id AS thread_id,
-									threads.thread_name AS thread_name,
-									threads.starter AS starter_id,
-									users.username AS starter_name
-										FROM threads
-											INNER JOIN users
-												ON threads.starter=users.id
-										WHERE threads.category_id=:cat_id";
-			$threadRes = $db->prepare($threadQuery);
-			$threadRes->bindParam(':cat_id', $categoryID);
-			$threadRes->execute();
+			/* If show only solved is true */
+			if ($showOnlySolved) {
+				/* Get all the threads in this category that are solved */
+				$threadQuery = "SELECT threads.id AS thread_id,
+										threads.thread_name AS thread_name,
+										threads.starter AS starter_id,
+										users.username AS starter_name
+											FROM threads
+												INNER JOIN users
+													ON threads.starter=users.id
+												WHERE threads.category_id=:cat_id
+													AND solved=:solved_value";
+				$threadRes = $db->prepare($threadQuery);
+				$threadRes->bindParam(':cat_id', $categoryID);
+				$threadRes->bindParam(':solved_value', $solvedValue);
+				$threadRes->execute();
+			} else if ($showOnlyUnsolved) {
+				/* If show only unsolved is true */
+				/* Get all the threads in this category that are unsolved */
+				$threadQuery = "SELECT threads.id AS thread_id,
+										threads.thread_name AS thread_name,
+										threads.starter AS starter_id,
+										users.username AS starter_name
+											FROM threads
+												INNER JOIN users
+													ON threads.starter=users.id
+												WHERE threads.category_id=:cat_id
+													AND solved=:solved_value";
+				$threadRes = $db->prepare($threadQuery);
+				$threadRes->bindParam(':cat_id', $categoryID);
+				$threadRes->bindParam(':solved_value', $solvedValue);
+				$threadRes->execute();
+			} else {
+				/* Get all the threads in this category */
+				$threadQuery = "SELECT threads.id AS thread_id,
+										threads.thread_name AS thread_name,
+										threads.starter AS starter_id,
+										users.username AS starter_name
+											FROM threads
+												INNER JOIN users
+													ON threads.starter=users.id
+											WHERE threads.category_id=:cat_id";
+				$threadRes = $db->prepare($threadQuery);
+				$threadRes->bindParam(':cat_id', $categoryID);
+				$threadRes->execute();
+			}
 
 			while ($row = $threadRes->fetch(PDO::FETCH_ASSOC)) {
 		?>
@@ -97,6 +164,7 @@
 		<?php
 			}
 		?>
+			</tbody>
 		</table>
 		<?php
 			/* Require the footer */
