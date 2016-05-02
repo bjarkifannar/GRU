@@ -1,14 +1,12 @@
 <?php
 	/* Get a database connection */
 	require_once 'core/db_connect.php';
+
+	$canRemoveForum = FALSE;
+	$userID = null;
 	
 	/* Set the page name for the title */
 	$pageName = "Home";
-
-	/* Prepare to fetch the forums */
-	$forumQuery = "SELECT id, forum_name FROM forums ORDER BY forum_name ASC";
-	$forumRes = $db->prepare($forumQuery);
-	$forumRes->execute();
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,6 +20,33 @@
 		<?php
 			/* Require the header */
 			require_once 'inc/header.php';
+
+			/* If the user is logged in */
+			if ($logged == "in") {
+				/* Get the user ID */
+				$userID = $_SESSION['user_id'];
+
+				/* Check if this user can remove forums */
+				$userRoleQuery = "SELECT role_id FROM users WHERE id=:user_id LIMIT 1";
+				$userRoleRes = $db->prepare($userRoleQuery);
+				$userRoleRes->bindParam(':user_id', $userID);
+				$userRoleRes->execute();
+
+				while ($row = $userRoleRes->fetch(PDO::FETCH_ASSOC)) {
+					/* If this user is an admin */
+					if ($row['role_id'] == 3) {
+						/* This user can remove forums */
+						$canRemoveForum = TRUE;
+					}
+				}
+
+				$userRoleRes = null;
+			}
+
+			/* Prepare to fetch the forums */
+			$forumQuery = "SELECT id, forum_name FROM forums ORDER BY forum_name ASC";
+			$forumRes = $db->prepare($forumQuery);
+			$forumRes->execute();
 		?>
 		<table class="forum-list-table">
 			<thead>
@@ -47,6 +72,15 @@
 				<tr class="forum-setup">	
 					<td class="left-side">
 						<h3><a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3><div class="text-dec-Forum-Name">This is a test text for forum description.</div>
+						<?php
+							/* If this user can remove forums */
+							if ($canRemoveForum) {
+								/* Give him/her an option to remove this forum */
+						?>
+						<a href="remove_forum.php?fid=<?php echo $row['id']; ?>">Remove Forum</a>
+						<?php
+							}
+						?>
 					</td>
 					<td class="right-side">
 						<h3><a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3><div class="text-dec-Last-Post">Poster: <a href="*">TestPoster</a></div>
