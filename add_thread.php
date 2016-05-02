@@ -4,6 +4,7 @@
 
 	/* Category ID */
 	$categoryID = null;
+	$forumID = null;
 	
 	/* Set the page name for the title */
 	$pageName = "Add Thread";
@@ -41,6 +42,18 @@
 		?>
 		<?php
 			if (isset($_POST['submit'])) {
+				/* Get the forum id */
+				$forumIDQuery = "SELECT forum_id FROM categories WHERE id=:cat_id LIMIT 1";
+				$forumIDRes = $db->prepare($forumIDQuery);
+				$forumIDRes->bindParam(':cat_id', $categoryID);
+				$forumIDRes->execute();
+
+				while ($row = $forumIDRes->fetch(PDO::FETCH_ASSOC)) {
+					$forumID = $row['forum_id'];
+				}
+
+				$forumIDRes = null;
+				
 				/* Get the title, the content and the user's ID */
 				$threadTitle = $_POST['thread_title'];
 				$threadContent = $_POST['editor'];
@@ -66,11 +79,13 @@
 				$newTitle = strip_tags($threadTitle);
 
 				/* Insert the thread */
-				$insertThreadQuery = "INSERT INTO threads (thread_name, category_id, starter) VALUES (:thread_name, :category_id, :thread_starter)";
+				$insertThreadQuery = "INSERT INTO threads (thread_name, category_id, starter, forum_id)
+													VALUES (:thread_name, :category_id, :thread_starter, :forum_id)";
 				$insertThreadRes = $db->prepare($insertThreadQuery);
 				$insertThreadRes->bindParam(':thread_name', $newTitle);
 				$insertThreadRes->bindParam(':category_id', $categoryID);
 				$insertThreadRes->bindParam(':thread_starter', $userID);
+				$insertThreadRes->bindParam(':forum_id', $forumID);
 				$insertThreadRes->execute();
 				$insertThreadRes = null;
 
@@ -97,13 +112,14 @@
 
 				/* Insert the post into the thread */
 				$insertPostQuery = "INSERT INTO posts
-												(post_name, thread_id, posted_by, post_content)
-										VALUES (:post_name, :thread_id, :posted_by, :post_content)";
+												(post_name, thread_id, posted_by, post_content, forum_id)
+										VALUES (:post_name, :thread_id, :posted_by, :post_content, :forum_id)";
 				$insertPostRes = $db->prepare($insertPostQuery);
 				$insertPostRes->bindParam(':post_name', $newTitle);
 				$insertPostRes->bindParam(':thread_id', $threadID);
 				$insertPostRes->bindParam(':posted_by', $userID);
 				$insertPostRes->bindParam(':post_content', $newContent);
+				$insertPostRes->bindParam(':forum_id', $forumID);
 				$insertPostRes->execute();
 				$insertPostRes = null;
 

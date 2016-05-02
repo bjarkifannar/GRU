@@ -4,6 +4,7 @@
 	
 	/* Thread ID */
 	$threadID = null;
+	$forumID = null;
 
 	/* Set the page name for the title */
 	$pageName = "Thread";
@@ -154,6 +155,18 @@
 			/* Users can reply if they are logged in */
 			if ($logged == "in") {
 				if (isset($_POST['submit_reply'])) {
+					/* Get the forum ID */
+					$forumIDQuery = "SELECT forum_id FROM threads WHERE id=:thread_id LIMIT 1";
+					$forumIDRes = $db->prepare($forumIDQuery);
+					$forumIDRes->bindParam(':thread_id', $threadID);
+					$forumIDRes->execute();
+
+					while ($row = $forumIDRes->fetch(PDO::FETCH_ASSOC)) {
+						$forumID = $row['forum_id'];
+					}
+
+					$forumIDRes = null;
+					
 					/* Get the title, the content and the user's ID */
 					$replyTitle = $_POST['reply_title'];
 					$replyContent = $_POST['reply_content'];
@@ -179,13 +192,14 @@
 					$newTitle = strip_tags($replyTitle);
 
 					/* Insert the reply */
-					$insertReplyQuery = "INSERT INTO posts (post_name, thread_id, posted_by, post_content)
-													VALUES (:post_name, :thread_id, :posted_by, :post_content)";
+					$insertReplyQuery = "INSERT INTO posts (post_name, thread_id, posted_by, post_content, forum_id)
+													VALUES (:post_name, :thread_id, :posted_by, :post_content, :forum_id)";
 					$insertReplyRes = $db->prepare($insertReplyQuery);
 					$insertReplyRes->bindParam(':post_name', $newTitle);
 					$insertReplyRes->bindParam(':thread_id', $threadID);
 					$insertReplyRes->bindParam(':posted_by', $userID);
 					$insertReplyRes->bindParam(':post_content', $newContent);
+					$insertReplyRes->bindParam(':forum_id', $forumID);
 					$insertReplyRes->execute();
 					$insertReplyRes = null;
 
