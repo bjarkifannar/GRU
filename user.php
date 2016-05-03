@@ -156,11 +156,16 @@
 				<tr>
 				<tr>
 					<?php
-						if ($logged == "in") {$user_id = $_SESSION['user_id'];}	
+						#if ($logged == "in") {$user_id = $_SESSION['user_id'];}
+						$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+						$id = 1;
 
-						$image_query = "SELECT id, profile_img FROM users WHERE id = :user_id";
+						print_r($_SESSION['user_id']);
+
+						$image_query = "SELECT user_settings.user_id, profile_img FROM users, user_settings WHERE user_settings.user_id = 1";
 						$imageRes = $db->prepare($image_query);
-						$imageRes->bindParam(':user_id', $user_id);
+						#$imageRes->bindParam(':user_id', $user_id);
+						$imageRes->bindParam(':id', $id);
 						$imageRes->execute();
 
 						while ($row = $imageRes->fetch(PDO::FETCH_ASSOC)) {

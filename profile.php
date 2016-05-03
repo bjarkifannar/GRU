@@ -106,14 +106,14 @@
 				<?php
 					while ($row = $imageRes->fetch(PDO::FETCH_ASSOC)) {
 						if (is_null($row['profile_img'])) {
-							echo "<tr><td class='user-image'><img src=img/default-user-image.png width='200' height='200'/></td></tr>";
+							echo "<tr><td class='user-image' align='center'><img src=img/default-user-image.png width='200' height='200'/></td></tr>";
 						}
 						else {
-							echo "<tr><td class='user-image'><img src=img/".$row['profile_img']." width='200' height='200'/></td></tr>";
+							echo "<tr><td class='user-image' align='center'><img src=img/".$row['profile_img']." width='200' height='200'/></td></tr>";
 						}
 					}
 				?>
-				<tr><td><a href="upload_profile_img.php">Here you change you profile picture</a></td></tr>
+				<tr align="center"><td><a href="upload_profile_img.php">Here you change you profile picture</a></td></tr>
 				</tbody>
 			</table>
 		<?php
