@@ -71,13 +71,13 @@
 				?>
 				<tr class="forum-setup">	
 					<td class="left-side">
-						<h3><a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3><div class="text-dec-Forum-Name">This is a test text for forum description.</div>
+						<h3><a href="forum.php?id=<?php echo $row['id']; ?>" class="forum-link"><?php echo $row['forum_name']; ?></a></h3>
 						<?php
 							/* If this user can remove forums */
 							if ($canRemoveForum) {
 								/* Give him/her an option to remove this forum */
 						?>
-						<a href="remove_forum.php?fid=<?php echo $row['id']; ?>">Remove Forum</a>
+						<a href="remove_forum.php?fid=<?php echo $row['id']; ?>" class="text-dec-Forum-Name">Remove Forum</a>
 						<?php
 							}
 						?>

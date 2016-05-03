@@ -45,6 +45,7 @@
 	else if (stripos($_SERVER['REQUEST_URI'], 'register.php')){}
 	else if (stripos($_SERVER['REQUEST_URI'], 'search.php')){}
 	else if (stripos($_SERVER['REQUEST_URI'], 'user.php')){}
+	else if (stripos($_SERVER['REQUEST_URI'], 'upload_profile_img.php')){}
 	else {require_once "media-buttons.php";}
 
  ?>

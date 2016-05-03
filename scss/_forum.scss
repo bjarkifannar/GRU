@@ -35,13 +35,10 @@
 	border: 0.1em solid;
 	border-color: $basecolor;
 	
-	td {
-
-		a {
-			padding-top: 0.5em;
-			padding-bottom: 0.2em;
-			margin: 0 auto;
-		}
+	.forum-link{
+		padding-top: 0.5em;
+		padding-bottom: 0.2em;
+		margin: 0 auto;
 	}
 }
 
@@ -63,6 +60,7 @@
 	font-size: 85%;
 	padding-bottom: 0.5em;
 	margin-left: 0.8em;
+	display: block;
 }
 
 .text-dec-Last-Post {
