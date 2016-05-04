@@ -90,6 +90,30 @@
 						<p><?php echo $row['register_time']; ?></p>
 					</td>
 				</tr>
+				<?php
+					$social_query = "SELECT fb_link, twitter_link, st_link, twitch_link FROM user_social WHERE user_id = :user_id";
+					$social_res = $db->prepare($social_query);
+					$social_res->bindParam(':user_id', $user_id);
+					$social_res->execute();
+
+					$num_rows = $social_res->rowCount();
+
+					while ($row = $social_res->fetch(PDO::FETCH_ASSOC)) {
+						$fb_link = $row['fb_link'];
+						$twitter_link = $row['twitter_link'];
+						$st_link = $row['st_link'];
+						$twitch_link = $row['twitch_link'];
+					}
+					echo "<tr><td><p><b>Social Links:</b></p></td><td>";
+					if (!is_null($fb_link) && $fb_link != "") {echo "<a href=".$fb_link." target=\"_blank\"><img src='img/facebook-icon.png'></a>";}
+					if (!is_null($twitter_link) && $twitter_link != "") {echo "<a href=".$twitter_link." target=\"_blank\"><img src='img/twitter-icon.png'></a>";}
+					if (!is_null($st_link) && $st_link != "") {echo "<a href=".$st_link." target=\"_blank\"><img src='img/steam-icon.jpg'></a>";}
+					if (!is_null($twitch_link) && $twitch_link != "") {echo "<a href=".$twitch_link." target=\"_blank\"><img src='img/twitch-icon.png'></a>";}
+					echo "</td></tr>";
+
+
+					$social_res = null;
+				?>
 				<tr>
 					<td colspan="2"><a href="update_user.php">Update User Info</a></td>
 				</tr>
@@ -115,6 +139,9 @@
 				?>
 				<tr align="center"><td><a href="upload_profile_img.php">Here you change you profile picture</a></td></tr>
 				</tbody>
+			</table>
+			<!--<tr><td><a href=".$row['fb_link']"><img src="img/facebook-icon.png"></a></td></tr>-->
+			<table>
 			</table>
 		<?php
 			}

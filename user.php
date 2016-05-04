@@ -148,12 +148,35 @@
 					</td>
 				</tr>
 				<?php
+					$social_query = "SELECT fb_link, twitter_link, st_link, twitch_link FROM user_social WHERE user_id = :user_id";
+					$social_res = $db->prepare($social_query);
+					$social_res->bindParam(':user_id', $uid);
+					$social_res->execute();
+
+					$num_rows = $social_res->rowCount();
+
+					while ($row = $social_res->fetch(PDO::FETCH_ASSOC)) {
+						$fb_link = $row['fb_link'];
+						$twitter_link = $row['twitter_link'];
+						$st_link = $row['st_link'];
+						$twitch_link = $row['twitch_link'];
+					}
+					echo "<tr><td><p><b>Social Links:</b></p></td><td>";
+					if (!is_null($fb_link) && $fb_link != "") {echo "<a href=".$fb_link." target=\"_blank\"><img src='img/facebook-icon.png'></a>";}
+					if (!is_null($twitter_link) && $twitter_link != "") {echo "<a href=".$twitter_link." target=\"_blank\"><img src='img/twitter-icon.png'></a>";}
+					if (!is_null($st_link) && $st_link != "") {echo "<a href=".$st_link." target=\"_blank\"><img src='img/steam-icon.jpg'></a>";}
+					if (!is_null($twitch_link) && $twitch_link != "") {echo "<a href=".$twitch_link." target=\"_blank\"><img src='img/twitch-icon.png'></a>";}
+					echo "</td></tr>";
+
+
+					$social_res = null;
+				?>
+				<?php
 					/* If this user is logged in as an admin he/she can see banned_until and the ban_reason
 					 * and can also ban this user */
 					if ($logged == "in") {
 						if ($_SESSION['role_id'] == 3) {
 				?>
-				<tr>
 				<tr>
 					<?php
 						$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
@@ -173,6 +196,7 @@
 						}
 					?>
 				</tr>
+				<tr>
 					<td>
 						<p><b>Banned until:</b></p>
 					</td>
