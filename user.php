@@ -175,12 +175,6 @@
 
 					$social_res = null;
 				?>
-				<?php
-					/* If this user is logged in as an admin he/she can see banned_until and the ban_reason
-					 * and can also ban this user */
-					if ($logged == "in") {
-						if ($_SESSION['role_id'] == 3) {
-				?>
 				<tr>
 					<?php
 						$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
@@ -198,8 +192,16 @@
 								echo "<td class='user-image'><img src=img/".$row['profile_img']." width='200' height='200'/></td>";
 							}
 						}
+
+						$imageRes = null;
 					?>
 				</tr>
+				<?php
+					/* If this user is logged in as an admin he/she can see banned_until and the ban_reason
+					 * and can also ban this user */
+					if ($logged == "in") {
+						if ($_SESSION['role_id'] == 3) {
+				?>
 				<tr>
 					<td>
 						<p><b>Banned until:</b></p>

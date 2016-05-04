@@ -4,6 +4,7 @@
 	
 	/* Set the page name for the title */
 	$pageName = "Search";
+	$uid = null;
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,9 +24,9 @@
 					<input type="text" class="search-text" name="q" size="21" placeholder="Search Here" maxlength="120">
 					<input type="submit" value="search" name="search" class="search-button"><br>
 					<div class="search-radio">
-						<input type="radio" name="searched" value="thread" checked>Threads
-	  					<input type="radio" name="searched" value="name">Names
-	  					<input type="radio" name="searched" value="post">Posts
+						<input type="radio" name="searched" value="thread" id="thread" checked><label for="thread">Threads</label>
+	  					<input type="radio" name="searched" value="name" id="name"><label for="name">Names</label>
+	  					<input type="radio" name="searched" value="post" id="post"><label for="post">Posts</label></b>
 					</div>
 			</form>
 			<div class="search-clear"></div>
@@ -72,13 +73,29 @@
 				<table class="search-table">
 					<tbody>
 					<?php
-
 						while ($row = $queryRes->fetch(PDO::FETCH_ASSOC)) {
+
+							$user_query = "SELECT role_id FROM users WHERE id = :user_id";
+							$userbarRes = $db->prepare($user_query);
+							$userbarRes->bindParam(':user_id', $row['id']);
+							$userbarRes->execute();
+
 							if (is_null($row['profile_img'])) {
-								echo "<tr><td class='user-image'><img src=img/default-user-image.png width='100' height='100'/></td><td class='search-output'><a href='".$name_link.$row['id']."'>".$row['username']."</a></td></tr>";
+								echo "<tr><td class='user-image'><img src=img/default-user-image.png width='100' height='100'/></td><td class='search-output'><a href='".$name_link.$row['id']."'>".$row['username']."</a><br>";
 							}
 							else {
-								echo "<tr><td class='user-image'><img src=img/".$row['profile_img']." width='100' height='100'/></td><td class='search-output'><a href='".$name_link.$row['id']."'>".$row['username']."</a></td></tr>";
+								echo "<tr><td class='user-image'><img src=img/".$row['profile_img']." width='100' height='100'/></td><td class='search-output'><a href='".$name_link.$row['id']."'>".$row['username']."</a><br>";
+							}
+							while ($row2 = $userbarRes->fetch(PDO::FETCH_ASSOC)) {
+								if ($row2['role_id'] == 3) {
+									echo "<img src='img/userbar-admin.png'></td></tr>";
+								}
+								else if ($row2['role_id'] == 2) {
+									echo "<img src='img/userbar-mod.png'></td></tr>";
+								}
+								else if ($row2['role_id'] == 1){
+									echo "<img src='img/userbar-user.png'></td></tr>";
+								}
 							}
 						}
 					?>

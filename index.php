@@ -62,7 +62,7 @@
 						<h1>Forum Name</h1>
 					</td>
 					<td class="right-side">
-						<h1>Last Post</h1>
+						<h1>Last Thread</h1>
 					</td>
 				</tr>
 				<?php
@@ -83,7 +83,25 @@
 						?>
 					</td>
 					<td class="right-side">
-						<h3><a href="forum.php?id=<?php echo $row['id']; ?>"><?php echo $row['forum_name']; ?></a></h3><div class="text-dec-Last-Post">Poster: <a href="*">TestPoster</a></div>
+						<?php 
+							$threadquery = "SELECT t1.id AS thread_id, t1.thread_name AS thread_name, users.id AS user_id, users.username AS username
+												FROM threads t1
+													INNER JOIN users
+														ON t1.starter=users.id
+												WHERE t1.post_time = (SELECT MAX(post_time) FROM threads t2 WHERE t2.forum_id = :forum_id)
+													LIMIT 1";
+							$threadres = $db->prepare($threadquery);
+							$threadres->bindParam(':forum_id', $row['id']);
+							$threadres->execute();
+
+							while ($row2 = $threadres->fetch(PDO::FETCH_ASSOC)) {
+						?>
+						<h3><a href="thread.php?tid=<?php echo $row2['thread_id']; ?>"><?php echo $row2['thread_name']; ?></a></h3><div class="text-dec-Last-Post">Poster: <a href="user.php?uid=<?php echo $row2['user_id']; ?>"><?php echo $row2['username']; ?></a></div>
+						<?php 
+							}
+
+							$threadres = null; 
+						?>
 					</td>
 				</tr>
 				<?php
