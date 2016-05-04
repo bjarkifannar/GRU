@@ -4,6 +4,10 @@
 	
 	/* User ID */
 	$uid = null;
+	$fb_link = null;
+	$twitter_link = null;
+	$st_link = null;
+	$twitch_link = null;
 
 	/* Set the page name for the title */
 	$pageName = "User";
