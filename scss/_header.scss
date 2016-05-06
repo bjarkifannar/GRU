@@ -159,7 +159,7 @@ header {
 }
 
 /* Medium screens */
-@media screen and (min-width: 48em) {		//Þegar skjárinn er kominn í 48em (768px), Þá byrtist Hamburger menu og venjulegi er ekki lengur displayed.
+@media screen and (min-width: 65em) {		//Þegar skjárinn er kominn í 48em (768px), Þá byrtist Hamburger menu og venjulegi er ekki lengur displayed.
   	
   	.mobile {
     	display: none;

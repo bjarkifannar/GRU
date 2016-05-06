@@ -1,6 +1,9 @@
 #search-bar {
 	margin: 0 auto;
 	width: 90%;
+	label {
+		cursor: pointer;
+	}
 }
 
 #search {
@@ -62,11 +65,14 @@
 }
 
 .search-table {
-	margin: 0 auto;
+	margin: 1.5em auto;
 	width: 90%;
 	td:first-child {
 		width: 10%;
 	}
+}
+.search-name-left, .search-name-right{
+	width: 100%;
 }
 
 
@@ -84,6 +90,12 @@
 	
 	#search {
 		padding: 1.25em 0 0 0;
+	}
+	.search-name-left, .search-name-right {
+		width: 50%;
+	}
+	.search-name-right {
+		text-align: right;
 	}
 }
 
