@@ -74,7 +74,11 @@
 .search-name-left, .search-name-right{
 	width: 100%;
 }
-
+.search-name-right {
+	p {
+		margin: 0 0 0.5em 0;
+	}
+}
 
 
 @media screen and (min-width: 48em) {

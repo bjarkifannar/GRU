@@ -49,7 +49,22 @@
 		<table class="profile-table" align="center">
 			<thead>
 				<tr>
-					<th colspan="2">
+					<?php
+						$image_query = "SELECT id, profile_img FROM users WHERE id = :user_id";
+						$imageRes = $db->prepare($image_query);
+						$imageRes->bindParam(':user_id', $user_id);
+						$imageRes->execute();
+
+						while ($row2 = $imageRes->fetch(PDO::FETCH_ASSOC)) {
+							if (is_null($row2['profile_img'])) {
+								echo "<th class='user-image'><img src=img/default-user-image.png width='150' height='150'/></th>";
+							}
+							else {
+								echo "<th class='user-image'><img src=img/".$row2['profile_img']." width='150' height='150'/></th>";
+							}
+						}
+					?>
+					<th>
 						<h2><?php echo $username; ?></h2>
 					</th>
 				</tr>
@@ -123,30 +138,6 @@
 					<td colspan="2"><a href="update_user.php">Update User Info</a></td>
 				</tr>
 			</tbody>
-		</table>
-			<?php 
-				$image_query = "SELECT id, profile_img FROM users WHERE id = :user_id";
-					$imageRes = $db->prepare($image_query);
-					$imageRes->bindParam(':user_id', $user_id);
-					$imageRes->execute();
-			?>
-			<table class="user-image-table">
-				<tbody>
-				<?php
-					while ($row = $imageRes->fetch(PDO::FETCH_ASSOC)) {
-						if (is_null($row['profile_img'])) {
-							echo "<tr><td class='user-image' align='center'><img src=img/default-user-image.png width='200' height='200'/></td></tr>";
-						}
-						else {
-							echo "<tr><td class='user-image' align='center'><img src=img/".$row['profile_img']." width='200' height='200'/></td></tr>";
-						}
-					}
-				?>
-				<tr align="center"><td><a href="upload_profile_img.php">Here you change you profile picture</a></td></tr>
-				</tbody>
-			</table>
-			<!--<tr><td><a href=".$row['fb_link']"><img src="img/facebook-icon.png"></a></td></tr>-->
-			<table>
 			</table>
 		<?php
 			}

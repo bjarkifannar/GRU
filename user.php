@@ -63,7 +63,26 @@
 		<table class="user-table">
 			<thead>
 				<tr>
-					<th colspan="2">
+						<?php
+							$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+
+							$image_query = "SELECT profile_img FROM users WHERE id = :id";
+							$imageRes = $db->prepare($image_query);
+							$imageRes->bindParam(':id', $uid);
+							$imageRes->execute();
+
+							while ($row3 = $imageRes->fetch(PDO::FETCH_ASSOC)) {
+								if (is_null($row3['profile_img'])) {
+									echo "<th class='user-image'><img src=img/default-user-image.png width='150' height='150'/></th>";
+								}
+								else {
+									echo "<th class='user-image'><img src=img/".$row3['profile_img']." width='150' height='150'/></th>";
+								}
+							}
+
+							$imageRes = null;
+						?>
+					<th>
 						<h2><?php echo $row['username']; ?></h2>
 					</th>
 				</tr>
@@ -213,29 +232,7 @@
 					echo "</td></tr>";
 
 					$social_res = null;
-				?>
-				<tr>
-					<?php
-						$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
-						$image_query = "SELECT profile_img FROM users WHERE id = :id";
-						$imageRes = $db->prepare($image_query);
-						$imageRes->bindParam(':id', $uid);
-						$imageRes->execute();
-
-						while ($row3 = $imageRes->fetch(PDO::FETCH_ASSOC)) {
-							if (is_null($row3['profile_img'])) {
-								echo "<td class='user-image'><img src=img/default-user-image.png width='200' height='200'/></td>";
-							}
-							else {
-								echo "<td class='user-image'><img src=img/".$row3['profile_img']." width='200' height='200'/></td>";
-							}
-						}
-
-						$imageRes = null;
-					?>
-				</tr>
-				<?php
 					/* If this user is logged in as an admin he/she can see banned_until and the ban_reason
 					 * and can also ban this user */
 					if ($logged == "in") {

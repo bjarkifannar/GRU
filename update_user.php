@@ -157,6 +157,7 @@
 					</form>
 				</td>
 			</tr>
+			<tr><td><a href="upload_profile_img.php">Here you change you profile picture</a></td></tr>
 		</table>
 		<?php
 			if (isset($_POST['fb_sub']) || isset($_POST['twitter_sub']) || isset($_POST['st_sub']) || isset($_POST['twitch_sub'])) {
