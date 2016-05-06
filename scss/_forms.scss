@@ -1,4 +1,4 @@
-.register-table, .login-table, .profile-table, .user-table, .update-table, .user-image-table, .user-image-table {
+.register-table, .login-table, .profile-table, .user-table, .update-table, .user-image-table, .user-image-table, .social-link-table{
 	width: 90%;
 	max-width: 30em;
 	margin: 0 auto;
@@ -13,7 +13,12 @@
 		padding: 0.5em;
 	}
 }
-
+.social-link-table {
+	margin: 1.5em auto;
+	input {
+		width: 100%;
+	}
+}
 .thread-list-table, .social-links{
 	align: center;
 	width: 90%;
@@ -37,13 +42,21 @@ td:first-child {
 }
 
 @media screen and (min-width: 48em) {
-	.login-table, .register-table, .profile-table, .thread-list-table, .user-table{
+	.login-table, .register-table, .profile-table, .thread-list-table, .user-table, .social-link-table{
 		width: 75%;
+	}
+	.social-link-table {
+		input {
+			width: 75%;
+		}
+		input[type='submit'] {
+			width: 19%;
+		}
 	}
 }
 
 @media screen and (min-width: 60em) {
-	.login-table, .register-table, .profile-table, .thread-list-table, .user-table{
+	.login-table, .register-table, .profile-table, .thread-list-table, .user-table, .social-link-table{
 		width: 50%;
 	}
 }
