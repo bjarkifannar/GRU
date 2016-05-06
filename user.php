@@ -152,6 +152,46 @@
 					</td>
 				</tr>
 				<?php
+					$numThreadsQuery = "SELECT COUNT(id) AS num_threads FROM threads WHERE starter=:starter";
+					$numThreadsRes = $db->prepare($numThreadsQuery);
+					$numThreadsRes->bindParam(':starter', $uid);
+					$numThreadsRes->execute();
+
+					while ($row4 = $numThreadsRes->fetch(PDO::FETCH_ASSOC)) {
+				?>
+				<tr>
+					<td>
+						<p><b>Number of threads:</b></p>
+					</td>
+					<td>
+						<p><?php echo $row4['num_threads']; ?></p>
+					</td>
+				</tr>
+				<?php
+					}
+
+					$numThreadsRes = null;
+					
+					$numPostsQuery = "SELECT COUNT(id) AS num_posts FROM posts WHERE posted_by=:posted_by";
+					$numPostsRes = $db->prepare($numPostsQuery);
+					$numPostsRes->bindParam(':posted_by', $uid);
+					$numPostsRes->execute();
+
+					while ($row5 = $numPostsRes->fetch(PDO::FETCH_ASSOC)) {
+				?>
+				<tr>
+					<td>
+						<p><b>Number of posts:</b></p>
+					</td>
+					<td>
+						<p><?php echo $row5['num_posts']; ?></p>
+					</td>
+				</tr>
+				<?php
+					}
+
+					$numPostsRes = null;
+
 					$social_query = "SELECT fb_link, twitter_link, st_link, twitch_link FROM user_social WHERE user_id = :user_id";
 					$social_res = $db->prepare($social_query);
 					$social_res->bindParam(':user_id', $uid);
@@ -159,11 +199,11 @@
 
 					$num_rows = $social_res->rowCount();
 
-					while ($row = $social_res->fetch(PDO::FETCH_ASSOC)) {
-						$fb_link = $row['fb_link'];
-						$twitter_link = $row['twitter_link'];
-						$st_link = $row['st_link'];
-						$twitch_link = $row['twitch_link'];
+					while ($row2 = $social_res->fetch(PDO::FETCH_ASSOC)) {
+						$fb_link = $row2['fb_link'];
+						$twitter_link = $row2['twitter_link'];
+						$st_link = $row2['st_link'];
+						$twitch_link = $row2['twitch_link'];
 					}
 					echo "<tr class='social-links'><td><p><b>Social Links:</b></p></td><td>";
 					if (!is_null($fb_link) && $fb_link != "") {echo "<a href=".$fb_link." target=\"_blank\"><img src='img/facebook-icon.png'></a>";}
@@ -171,7 +211,6 @@
 					if (!is_null($st_link) && $st_link != "") {echo "<a href=".$st_link." target=\"_blank\"><img src='img/steam-icon.jpg'></a>";}
 					if (!is_null($twitch_link) && $twitch_link != "") {echo "<a href=".$twitch_link." target=\"_blank\"><img src='img/twitch-icon.png'></a>";}
 					echo "</td></tr>";
-
 
 					$social_res = null;
 				?>
@@ -184,12 +223,12 @@
 						$imageRes->bindParam(':id', $uid);
 						$imageRes->execute();
 
-						while ($row = $imageRes->fetch(PDO::FETCH_ASSOC)) {
-							if (is_null($row['profile_img'])) {
+						while ($row3 = $imageRes->fetch(PDO::FETCH_ASSOC)) {
+							if (is_null($row3['profile_img'])) {
 								echo "<td class='user-image'><img src=img/default-user-image.png width='200' height='200'/></td>";
 							}
 							else {
-								echo "<td class='user-image'><img src=img/".$row['profile_img']." width='200' height='200'/></td>";
+								echo "<td class='user-image'><img src=img/".$row3['profile_img']." width='200' height='200'/></td>";
 							}
 						}
 
