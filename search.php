@@ -80,23 +80,60 @@
 							$userbarRes->bindParam(':user_id', $row['id']);
 							$userbarRes->execute();
 
+							echo "<tr>";
+
 							if (is_null($row['profile_img'])) {
-								echo "<tr><td class='user-image'><img src=img/default-user-image.png width='100' height='100'/></td><td class='search-output'><a href='".$name_link.$row['id']."'>".$row['username']."</a><br>";
+								echo "<td class='user-image'><img src=img/default-user-image.png width='100' height='100'/></td>";
 							}
 							else {
-								echo "<tr><td class='user-image'><img src=img/".$row['profile_img']." width='100' height='100'/></td><td class='search-output'><a href='".$name_link.$row['id']."'>".$row['username']."</a><br>";
+								echo "<td class='user-image'><img src=img/".$row['profile_img']." width='100' height='100'/></td>";
 							}
+
+							echo "<td class='search-output'><div class=\"search-name-left\"><a href='".$name_link.$row['id']."'>".$row['username']."</a><br>";
+
 							while ($row2 = $userbarRes->fetch(PDO::FETCH_ASSOC)) {
 								if ($row2['role_id'] == 3) {
-									echo "<img src='img/userbar-admin.png'></td></tr>";
+									echo "<img src='img/userbar-admin.png'>";
 								}
 								else if ($row2['role_id'] == 2) {
-									echo "<img src='img/userbar-mod.png'></td></tr>";
+									echo "<img src='img/userbar-mod.png'>";
 								}
 								else if ($row2['role_id'] == 1){
-									echo "<img src='img/userbar-user.png'></td></tr>";
+									echo "<img src='img/userbar-user.png'>";
 								}
 							}
+
+							echo "</div>";
+
+							$userbarRes = null;
+
+							$threadsQuery = "SELECT COUNT(id) AS num_threads FROM threads WHERE starter=:starter";
+							$threadsRes = $db->prepare($threadsQuery);
+							$threadsRes->bindParam(':starter', $row['id']);
+							$threadsRes->execute();
+
+							echo '<div class="search-name-right">';
+
+							while ($row3 = $threadsRes->fetch(PDO::FETCH_ASSOC)) {
+								echo '<p><b>Threads:</b> '.$row3['num_threads'].'</p>';
+							}
+
+							$threadsRes = null;
+
+							$postsQuery = "SELECT COUNT(id) AS num_posts FROM posts WHERE posted_by=:posted_by";
+							$postsRes = $db->prepare($postsQuery);
+							$postsRes->bindParam(':posted_by', $row['id']);
+							$postsRes->execute();
+
+							while ($row4 = $postsRes->fetch(PDO::FETCH_ASSOC)) {
+								echo '<p><b>Posts:</b> '.$row4['num_posts'].'</p>';
+							}
+
+							$postsRes = null;
+
+							echo '</div>';
+
+							echo "</td></tr>";
 						}
 					?>
 					</tbody>

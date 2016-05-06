@@ -37,7 +37,7 @@
 				$targetFile = $targetDir.basename($_FILES["profile_img"]["name"]); /* The file path */
 				$uploadOk = 1; /* Is it OK to upload this file? */
 				$imageFileType = pathinfo($targetFile, PATHINFO_EXTENSION); /* The file type */
-				$maxFileSize = 500000; /* Max file size in bytes */
+				$maxFileSize = 10000000; /* Max file size in bytes */
 
 				/* Check if this is an image */
 				$check = getimagesize($_FILES["profile_img"]["tmp_name"]);
