@@ -72,6 +72,14 @@
 					$scriptTags->item($i)->parentNode->removeChild($scriptTags->item($i));
 				}
 
+				$imgTags = $dom->getElementsByTagName('img');
+				$imgLength = $imgTags->length;
+
+				/* Remove the style attribute from the img tags */
+				for ($i = 0; $i < $imgLength; $i++) {
+					$imgTags->item($i)->removeAttribute('style');
+				}
+
 				/* Get the new html */
 				$newContent = $dom->saveHTML();
 
