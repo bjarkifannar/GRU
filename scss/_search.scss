@@ -93,9 +93,14 @@
 	}
 	.search-name-left, .search-name-right {
 		width: 50%;
+		margin: 0;
 	}
 	.search-name-right {
 		text-align: right;
+		float: right;
+	}
+	.search-name-left {
+		float: left;
 	}
 }
 
