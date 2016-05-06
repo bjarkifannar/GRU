@@ -1,4 +1,4 @@
-.register-table, .login-table, .profile-table, .user-table, .update-table, .user-image-table, .user-image-table, .social-link-table{
+.register-table, .login-table, .profile-table, .user-table, .update-table, .user-image-table, .user-image-table, .social-link-table {
 	width: 90%;
 	max-width: 30em;
 	margin: 0 auto;
@@ -13,6 +13,12 @@
 		padding: 0.5em;
 	}
 }
+
+.add-signature-table, .reply-table{
+	width: 90%;
+	margin: 0 auto;
+}
+
 .social-link-table {
 	margin: 1.5em auto;
 	input {
@@ -53,7 +59,7 @@ td:first-child {
 }
 
 @media screen and (min-width: 48em) {
-	.login-table, .register-table, .profile-table, .thread-list-table, .user-table, .social-link-table{
+	.login-table, .register-table, .profile-table, .thread-list-table, .user-table, .social-link-table {
 		width: 75%;
 	}
 	.social-link-table {
@@ -64,10 +70,16 @@ td:first-child {
 			width: 19%;
 		}
 	}
+	.add-signature-table, .reply-table{
+		width: 75%;
+	}
 }
 
 @media screen and (min-width: 60em) {
-	.login-table, .register-table, .profile-table, .thread-list-table, .user-table, .social-link-table{
+	.login-table, .register-table, .profile-table, .thread-list-table, .user-table, .social-link-table {
+		width: 50%;
+	}
+	.add-signature-table, .reply-table{
 		width: 50%;
 	}
 }

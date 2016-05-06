@@ -146,6 +146,23 @@
 						<hr>
 					</td>
 				</tr>
+				<tr>
+					<td class="signature-content">
+					<?php
+						$signatureQuery = "SELECT signature FROM users WHERE id = :user_id";
+						$signatureRes = $db->prepare($signatureQuery);
+						$signatureRes->bindParam(':user_id', $row['posted_by_id']);
+						$signatureRes->execute();
+
+						while ($row2 = $signatureRes->fetch(PDO::FETCH_ASSOC)) {
+							echo $row2['signature'];
+						}
+
+						$signatureRes = null;
+
+					?>
+					 </td>
+				</tr>
 			<?php
 				}
 			?>
@@ -208,7 +225,7 @@
 				}
 		?>
 		<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
-			<table class="reply-table" style="width: 50%; margin: 0 auto;">
+			<table class="reply-table"s>
 				<thead>
 					<tr>
 						<th>

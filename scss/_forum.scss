@@ -22,6 +22,12 @@
     	max-width: 100%;
     }
 }
+.signature-content {
+	word-break: break-all;
+	img {
+		max-height: 10em;
+	}
+}
 
 .thread-def{
 	border-bottom: 1px solid black; 
