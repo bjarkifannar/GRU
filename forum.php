@@ -60,28 +60,55 @@
 		<table class="forum-category-table">
 			<thead>
 				<tr>
-					<th>
+					<th colspan="2">
 						<h2>Categories:</h2>
 					</th>
 				</tr>
 			</thead>
 			<tbody>
+				<tr class="forum-setup">
+					<td class="left-side">
+						<h1>Category Name</h1>
+					</td>
+					<td class="right-side">
+						<h1>Last Thread</h1>
+					</td>
+				</tr>
 				<?php
 					/* Fetch the category information and show it */
 					while ($row = $categoryRes->fetch(PDO::FETCH_ASSOC)) {
 				?>
-				<tr>
-					<td>
-						<a href="category.php?cid=<?php echo $row['id']; ?>"><h3><?php echo $row['category_name']; ?></h3></a>
-						<p><?php echo $row['category_desc']; ?></p>
+				<tr class="forum-setup">
+					<td class="left-side">
+						<h3><a href="category.php?cid=<?php echo $row['id']; ?>" class="forum-link"><?php echo $row['category_name']; ?></a></h3>
+						<p class="text-dec-Forum-Name"><?php echo $row['category_desc']; ?></p>
 				<?php
 						/* If the user can remove categories */
 						if ($canRemoveCategory) {
 				?>
-				<a href="remove_category.php?cid=<?php echo $row['id']; ?>">Remove Category</a>
+				<a href="remove_category.php?cid=<?php echo $row['id']; ?>" class="text-dec-Forum-Name">Remove Category</a>
 				<?php
 						}
 				?>
+					</td>
+					<td class="right-side">
+					<?php 
+						$threadquery = "SELECT t1.id AS thread_id, t1.thread_name AS thread_name, users.id AS user_id, users.username AS username
+											FROM threads t1
+												INNER JOIN users
+													ON t1.starter=users.id
+											WHERE t1.post_time = (SELECT MAX(post_time) FROM threads t2 WHERE t2.category_id = :cat_id)
+												LIMIT 1";
+						$threadres = $db->prepare($threadquery);
+						$threadres->bindParam(':cat_id', $row['id']);
+						$threadres->execute();
+
+						while ($row2 = $threadres->fetch(PDO::FETCH_ASSOC)) {
+					?>
+						<h3><a href="thread.php?tid=<?php echo $row2['thread_id']; ?>"><?php echo $row2['thread_name']; ?></a></h3><div class="text-dec-Last-Post">Poster: <a href="user.php?uid=<?php echo $row2['user_id']; ?>"><?php echo $row2['username']; ?></a></div>
+						<?php 
+							}
+						?>
 					</td>
 				</tr>
 				<?php

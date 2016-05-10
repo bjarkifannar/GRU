@@ -73,7 +73,7 @@
 		<table class="thread-list-table">
 			<thead>
 				<tr>
-					<th>
+					<th colspan="2">
 						<h2><?php echo $categoryName; ?></h2>
 					</th>
 				</tr>
@@ -104,6 +104,14 @@
 							}
 						?>
 						<p>Order by: <a href="<?php echo $currentURL; ?>&order=title_asc">Title A-Z</a> | <a href="<?php echo $currentURL; ?>&order=title_desc">Title Z-A</a> | <a href="<?php echo $currentURL; ?>&order=post_time_desc">Post Time (Newest First)</a> | <a href="<?php echo $currentURL; ?>&order=post_time_asc">Post Time (Oldest First)</a></p>
+					</td>
+				</tr>
+				<tr class="forum-setup">	
+					<td class="left-side">
+						<h1>Thread Name</h1>
+					</td>
+					<td class="right-side">
+						<h1>Last Activity</h1>
 					</td>
 				</tr>
 		<?php
@@ -345,10 +353,10 @@
 
 			while ($row = $threadRes->fetch(PDO::FETCH_ASSOC)) {
 		?>
-			<tr class="thread-def">
-				<td>
-					<a href="thread.php?tid=<?php echo $row['thread_id']; ?>"><h3><?php echo $row['thread_name']; ?></h3></a>
-					<a href="user.php?uid=<?php echo $row['starter_id']; ?>"><p><b><?php echo $row['starter_name']; ?></b></p></a>
+			<tr class="forum-setup">
+				<td class="left-side">
+					<h3><a href="thread.php?tid=<?php echo $row['thread_id']; ?>" class="forum-link"><?php echo $row['thread_name']; ?></h3></a>
+					<div class="text-dec-Last-Post"><h3>Creator: <a href="user.php?uid=<?php echo $row['starter_id']; ?>"><?php echo $row['starter_name']; ?></a></h3></div>
 					<?php
 						/* If the user is logged in */
 						if ($logged == "in") {
@@ -357,6 +365,25 @@
 								/* This user can remove the thread */
 								echo '<a href="remove_thread.php?tid='.$row['thread_id'].'">Remove</a>';
 							}
+						}
+					?>
+				</td>
+				<td class="right-side">
+					<?php 
+						$threadquery = "SELECT p1.created AS created, users.id AS user_id, users.username AS username
+											FROM posts p1
+												INNER JOIN users
+													ON p1.posted_by=users.id
+											WHERE p1.created = (SELECT MAX(created) FROM posts p2 WHERE p2.thread_id = :thread_id)
+												LIMIT 1";
+						$threadres = $db->prepare($threadquery);
+						$threadres->bindParam(':thread_id', $row['thread_id']);
+						$threadres->execute();
+
+						while ($row2 = $threadres->fetch(PDO::FETCH_ASSOC)) {
+					?>
+					<h3>User: <a href="user.php?uid=<?php echo $row2['user_id']; ?>"><?php echo $row2['username']; ?></a></h3><div class="text-dec-Last-Post">Time: <?php echo $row2['created']; ?></div>
+					<?php
 						}
 					?>
 				</td>
@@ -371,7 +398,7 @@
 		?>
 			<tr>
 				<td>
-					<a href="add_thread.php?cid=<?php echo $categoryID; ?>">Add thread</a>
+					<a href="add_thread.php?cid=<?php echo $categoryID; ?>" class="text-dec-Forum-Name">Add thread</a>
 				</td>
 			</tr>
 		<?php
