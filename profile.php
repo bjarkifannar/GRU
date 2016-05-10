@@ -22,6 +22,9 @@
 		<?php
 			/* Require the header */
 			require_once 'inc/header.php';
+			if ($logged == 'out') {
+				header('Location: index.php');
+			}
 
 			/* Get the users information */
 			$username = $_SESSION['username'];
@@ -57,10 +60,10 @@
 
 						while ($row2 = $imageRes->fetch(PDO::FETCH_ASSOC)) {
 							if (is_null($row2['profile_img'])) {
-								echo "<th class='user-image'><img src=img/default-user-image.png width='150' height='150'/></th>";
+								echo "<th class='user-image'><img src=img/default-user-image.png></th>";
 							}
 							else {
-								echo "<th class='user-image'><img src=img/".$row2['profile_img']." width='150' height='150'/></th>";
+								echo "<th class='user-image'><img src=img/".$row2['profile_img']."></th>";
 							}
 						}
 					?>
