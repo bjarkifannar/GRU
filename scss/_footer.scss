@@ -5,9 +5,10 @@ footer {
 	height: 0;
 	
 	.top {
-		background-color: $basecolor * 1.2;
+		width: 100%;
 		display: flex;
 		justify-content: space-around;
+		flex-direction: column;
 
 		h2{
 			padding-top: 0.5em;
@@ -20,7 +21,7 @@ footer {
 		}
 
 		.top-right, .top-left {
-			width: 50%;
+			width: 100%;
 			text-align: center;
 			ul {
 				list-style: none;
@@ -28,6 +29,9 @@ footer {
 				margin: 1em auto;
 				padding: 0;
 			}
+		}
+		.top-right {
+			background-color: $basecolor * 1.5;
 		}
 	}
 
@@ -37,5 +41,15 @@ footer {
 	}
 }
 @media screen and (min-width: 48em) {
-	width: 50%;
+	footer {
+		.top {
+			flex-direction: row;
+			background-color: $basecolor * 1.2;
+
+			.top-right, .top-left {
+				width: 50%;
+				background-color: $basecolor * 1.2;
+			}
+		}
+	}
 }

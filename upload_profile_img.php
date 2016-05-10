@@ -93,11 +93,17 @@
 			} else {
 				/* Show the form if the user has not submitted it */
 		?>
-		<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
-			Select an image to upload:
-			<input type="file" name="profile_img"><br>
-			<input type="submit" value="Upload" name="submit">
-		</form>
+		<table class="upload-table">
+			<tr>
+				<td>
+					<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+						Select an image to upload:
+						<input type="file" name="profile_img"><br>
+						<input type="submit" value="Upload" name="submit">
+					</form>
+				</td>
+			</tr>
+		</table>
 		<?php
 			}
 
