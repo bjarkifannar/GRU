@@ -148,7 +148,7 @@
 					<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
 						<img src="img/facebook-icon.png" width="<?php echo $img_dia; ?>" height="<?php echo $img_dia; ?>">
 						<input type="text" name="fb_link" value="<?php echo $fb_link; ?>">
-						<input type="submit" name="fb_sub">
+						<input type="submit" name="fb_sub" value="Submit">
 					</form>
 				</td>
 			</tr>
@@ -157,7 +157,7 @@
 					<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
 						<img src="img/twitter-icon.png" width="<?php echo $img_dia; ?>" height="<?php echo $img_dia; ?>">
 						<input type="text" name="twitter_link" value="<?php echo $twitter_link; ?>">
-						<input type="submit" name="twitter_sub">
+						<input type="submit" name="twitter_sub" value="Submit">
 					</form>
 				</td>
 			</tr>
@@ -166,7 +166,7 @@
 					<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
 						<img src="img/steam-icon.jpg" width="<?php echo $img_dia; ?>" height="<?php echo $img_dia; ?>">
 						<input type="text" name="st_link" value="<?php echo $st_link; ?>">
-						<input type="submit" name="st_sub">
+						<input type="submit" name="st_sub" value="Submit">
 					</form>
 				</td>
 			</tr>
@@ -175,7 +175,7 @@
 					<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
 						<img src="img/twitch-icon.png" width="<?php echo $img_dia; ?>" height="<?php echo $img_dia; ?>">
 						<input type="text" name="twitch_link" value="<?php echo $twitch_link; ?>">
-						<input type="submit" name="twitch_sub">
+						<input type="submit" name="twitch_sub" value="Submit">
 					</form>
 				</td>
 			</tr>

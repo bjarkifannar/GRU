@@ -25,6 +25,13 @@
 		margin: 0;
 	}
 }
+.thread-table {
+	thead {
+		th {
+			border-bottom: 1px solid black;
+		}
+	}
+}
 .signature-tips-talbe {
 	width: 90%;
 	margin: 0 auto;
