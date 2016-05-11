@@ -8,6 +8,9 @@
 	$twitter_link = null;
 	$st_link = null;
 	$twitch_link = null;
+	$name = null;
+	$email = null;
+	$gender = null;
 
 	/* Set the page name for the title */
 	$pageName = "Update user";
@@ -28,7 +31,19 @@
 				header('Location: index.php');
 			} else {
 				$userID = $_SESSION['user_id'];
+				$username = $_SESSION['username'];
 			}
+		?>
+		<?php 
+			$userQuery = "SELECT name, email, gender_id FROM users WHERE id = :user_id LIMIT 1";
+			$userRes = $db->prepare($userQuery);
+			$userRes->bindParam(':user_id', $userID);
+			$userRes->execute();
+
+			while ($row = $userRes->fetch(PDO::FETCH_ASSOC)) {
+				$name = $row['name'];
+				$email = $row['email'];
+				$gender = $row['gender_id'];
 		?>
 		<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" accept-charset="UTF-8">
 			<table class="update-table" align="center">
@@ -45,7 +60,7 @@
 							<label for="name">Name:*</label>
 						</td>
 						<td>
-							<input type="text" name="name" required>
+							<input type="text" name="name" value="<?php echo $name; ?>" required>
 						</td>
 					</tr>
 					<tr>
@@ -53,7 +68,7 @@
 							<label for="email">Email:*</label>
 						</td>
 						<td>
-							<input type="text" name="email" required>
+							<input type="text" name="email" value="<?php echo $email; ?>" required>
 						</td>
 					</tr>
 					<tr>
@@ -69,9 +84,9 @@
 								$genderRes->execute();
 
 								/* Show the genders */
-								while ($row = $genderRes->fetch(PDO::FETCH_ASSOC)) {
+								while ($row2 = $genderRes->fetch(PDO::FETCH_ASSOC)) {
 							?>
-							<option value="<?php echo $row['id']; ?>"><?php echo $row['gender']; ?></option>
+							<option value="<?php echo $row2['id']; ?>"><?php echo $row2['gender']; ?></option>
 							<?php
 								}
 
@@ -119,6 +134,13 @@
 
 		$link_res = null;
 
+		?>
+		<?php
+			}
+
+			/* Empty the userRes variable to free memory */
+			$userRes = null;
+			$imageRes = null;
 		?>
 		<table class="social-link-table">
 			<tr>

@@ -63,15 +63,19 @@
 				echo '<h2 align="center">Added Signature</h2>';
 			}
 		?>
+		<table class="signature-tips-talbe">
+			<tr class="tips-bottom">
+			</tr>
+		</table>
 		<table class="add-signature-table">
 			<tr>
-			<td>
-				<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
-					<br>
-					<textarea name="editor" id="signature_editor"></textarea>
-					<input type="submit" name="submit" value="Submit" class="add-thread-button">
-				</form>
-			</td>
+				<td>
+					<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+						<br>
+						<textarea name="editor" id="signature_editor"></textarea>
+						<input type="submit" name="submit" value="Submit" class="add-thread-button">
+					</form>
+				</td>
 			</tr>
 		</table>
 		<?php

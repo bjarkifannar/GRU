@@ -121,8 +121,52 @@
 			?>
 				<tr>
 					<td>
+					<div class="thread-user-info">
 						<h3 align="center"><?php echo $row['post_name']; ?></h3>
 						<a href="user.php?uid=<?php echo $row['posted_by_id']; ?>"><p><b><?php echo $row['posted_by']; ?></b></p></a>
+						<?php
+							$user_query = "SELECT role_id FROM users WHERE id = :user_id";
+							$userbarRes = $db->prepare($user_query);
+							$userbarRes->bindParam(':user_id', $row['posted_by_id']);
+							$userbarRes->execute();
+
+							while ($row2 = $userbarRes->fetch(PDO::FETCH_ASSOC)) {
+								if ($row2['role_id'] == 3) {
+									echo "<img src='img/userbar-admin.png'>";
+								}
+								else if ($row2['role_id'] == 2) {
+									echo "<img src='img/userbar-mod.png'>";
+								}
+								else if ($row2['role_id'] == 1){
+									echo "<img src='img/userbar-user.png'>";
+								}
+							}
+							$userbarRes = null;
+
+							$post_query = "SELECT COUNT(id) AS num_posts FROM posts WHERE posted_by = :user_id";
+							$postbadgeRes = $db->prepare($post_query);
+							$postbadgeRes->bindParam(':user_id', $row['posted_by_id']);
+							$postbadgeRes->execute();
+
+							while ($row3 = $postbadgeRes->fetch(PDO::FETCH_ASSOC)) {
+								if ($row3['num_posts'] >= 10) {
+									echo "<img src='img/userbar-megaposter.jpg'>";
+								}
+							}
+							$postbadgeRes = null;
+
+							$threads_query = "SELECT COUNT(id) AS num_thread FROM threads WHERE starter = :user_id";
+							$threadsbadgeRes = $db->prepare($threads_query);
+							$threadsbadgeRes->bindParam(':user_id', $row['posted_by_id']);
+							$threadsbadgeRes->execute();
+
+							while ($row4 = $threadsbadgeRes->fetch(PDO::FETCH_ASSOC)) {
+								if ($row4['num_thread'] >= 5) {
+									echo "<img src='img/userbar-threadstarter.jpg'>";
+								}
+							}
+
+						?>
 						<p><?php echo $row['created']; ?></p>
 						<?php
 							if ($row['revised'] != "" && $row['revised'] != NULL) {
@@ -137,6 +181,7 @@
 								}
 							}
 						?>
+						</div>
 						<hr>
 					</td>
 				</tr>
@@ -161,7 +206,8 @@
 						$signatureRes = null;
 
 					?>
-					 </td>
+					<hr>
+					</td>
 				</tr>
 			<?php
 				}

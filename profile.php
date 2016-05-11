@@ -9,6 +9,8 @@
 	$twitter_link = null;
 	$st_link = null;
 	$twitch_link = null;
+	$username = null;
+	$user_id = null;
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,13 +24,14 @@
 		<?php
 			/* Require the header */
 			require_once 'inc/header.php';
-			if ($logged == 'out') {
-				header('Location: index.php');
-			}
 
-			/* Get the users information */
-			$username = $_SESSION['username'];
-			$user_id = $_SESSION['user_id'];
+			if ($logged == "out") {
+				header('Location: index.php');
+			} else {
+				/* Get the users information */
+				$username = $_SESSION['username'];
+				$user_id = $_SESSION['user_id'];
+			}
 
 			$userQuery = "SELECT users.name AS user_name,
 									users.email AS user_email,

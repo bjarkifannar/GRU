@@ -1,13 +1,12 @@
-.forum-list-table, .forum-category-table, .add-category-table {
+.forum-list-table, .forum-category-table, .add-category-table, .thread-list-table {
 	width: 90%;
 	margin: 0 auto;
 	padding: 0;
-}
-.forum-list-table {
-	
 	h3 {
 		margin: 0.5em;
 	}
+}
+.forum-list-table {
 	margin-bottom: 2.3em;
 }
 
@@ -25,10 +24,13 @@
 .signature-content {
 	word-break: break-all;
 	img {
+		max-width: 100%;
 		max-height: 10em;
 	}
+	hr {
+		margin: 0;
+	}
 }
-
 .thread-def{
 	border-bottom: 1px solid black; 
 }
@@ -44,7 +46,7 @@
 	border: 0.1em solid;
 	border-color: $basecolor;
 	
-	.forum-link{
+	.forum-link {
 		padding-top: 0.5em;
 		padding-bottom: 0.2em;
 		margin: 0 auto;
@@ -107,7 +109,13 @@ h1 {
 @media screen and (min-width: 48em) {
 	.forum-list-table, .forum-category-table, .thread-table, .add-category-table{
 		width: 75%;
-	}
+		.signature-content {
+			word-break: break-all;
+			img {
+			max-height: 12.5em;
+			}
+		}
+	}	
 }
 
 /* Big screens */

@@ -1,4 +1,5 @@
 </div> <!-- .content-wrap -->
+<div class="footer-fixer"></div>
 <footer>
 	<div class="top">
 		<div class="top-left">
@@ -47,6 +48,7 @@
 	else if (stripos($_SERVER['REQUEST_URI'], 'user.php')){}
 	else if (stripos($_SERVER['REQUEST_URI'], 'upload_profile_img.php')){}
 	else if (stripos($_SERVER['REQUEST_URI'], 'update_settings.php')){}
+	else if (stripos($_SERVER['REQUEST_URI'], 'add_signature.php')){}
 	else {require_once "media-buttons.php";}
 
  ?>
