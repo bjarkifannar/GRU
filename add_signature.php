@@ -65,6 +65,7 @@
 		?>
 		<table class="signature-tips-talbe">
 			<tr class="tips-bottom">
+				<td><p>We recommend the size of the image to be 950 width and 200 hight</p></td>
 			</tr>
 		</table>
 		<table class="add-signature-table">
